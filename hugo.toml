@@ -1,0 +1,6 @@
+baseURL = 'https://brokenbackend.blog/'
+languageCode = 'en-us'
+title = 'Broken Backend'
+
+[[module.imports]]
+  path = "github.com/halogenica/beautifulhugo"
