@@ -1,16 +1,22 @@
 ---
-title: About me
-subtitle: Why you'd want to go on a date with me
+title: About This Blog
 comments: false
 ---
 
-My name is Inigo Montoya. I have the following qualities:
+This blog, **`brokenbackend.blog`**, is built on a single premise: **We learn to fix vulnerabilities by first understanding how they break.** 
 
-- I rock a great mustache
-- I'm extremely loyal to my family
+I believe the most effective way to master backend development and security is through shared experiences and hands-on practice. We learn through **Storytelling**, and I try to turn complex concepts into memorable **narrative case studies** (like *"The FamShare Story"*).
 
-What else do you need?
+Every vulnerability, fix, and best practice is backed by **real, runnable code** in Go, making you an active participant.
+My ultimate pursuit is to teach the best practices necessary for building backend systems that are both **reliable and secure**.
 
-### my history
+### About Me
 
-To be honest, I'm having some trouble remembering right now, so why don't you just watch [my movie](https://en.wikipedia.org/wiki/The_Princess_Bride_%28film%29) and it will answer **all** your questions.
+I am Wissem, take a look at my [**LinkedIn**](https://www.linkedin.com/in/wbelguidoum) profile and throw a connection request at me, I will be honored to connect with you.
+
+### My values : 
+  * Teaching is the best way to learn.
+  * Hands on practice is essential.
+  * Well-crafted code is paramount.
+  * Coffee is non-negotiable ☕
+
