@@ -1,16 +1,10 @@
-# Default target to show help if 'make' is run without arguments.
 .DEFAULT_GOAL := deploy
 
-# This ensures that 'deploy' and 'help' are treated as commands, not files.
 .PHONY: deploy help
 
-# This line is a placeholder for the commit message variable.
-# Example: make deploy m="Your commit message here"
 m :=
 
 deploy:
-# 1. Check if the commit message 'm' was provided.
-# This is a Make directive and must NOT be indented with a tab.
 ifeq ($(strip $(m)),)
 	$(error Commit message is missing. Usage: make deploy m="Your commit message")
 endif
