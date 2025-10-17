@@ -9,37 +9,27 @@ ifeq ($(strip $(m)),)
 	$(error Commit message is missing. Usage: make deploy m="Your commit message")
 endif
 
-	# The following lines are commands and MUST start with a TAB character.
-	
-	# 2a. Clean the public directory.
 	@echo "🧹 Step 1/8: Cleaning the public directory..."
 	rm -rf public/*
 	
-	# 2b. Build the site with Hugo.
 	@echo "🚀 Step 2/8: Building site with Hugo..."
 	hugo
 
-	# 2c. Add all changes specifically in the 'public' submodule.
 	@echo " public submodule | Step 3/8: Adding changes..."
 	git submodule foreach 'if [ "$$path" = "public" ]; then git add .; fi'
 
-	# 2d. Commit changes specifically in the 'public' submodule.
 	@echo " public submodule | Step 4/8: Committing changes..."
 	git submodule foreach 'if [ "$$path" = "public" ]; then git commit -m "$(m)" || true; fi'
 
-	# 2e. Push changes specifically from the 'public' submodule.
 	@echo " public submodule | Step 5/8: Pushing updates..."
 	git submodule foreach 'if [ "$$path" = "public" ]; then git push; fi'
 
-	# 2f. Add all changes in the main repository (including the submodule update).
 	@echo " main repo      | Step 6/8: Adding changes..."
 	git add .
 
-	# 2g. Commit changes in the main repository.
 	@echo " main repo      | Step 7/8: Committing changes..."
 	git commit -m "$(m)"
 
-	# 2h. Push the main repository.
 	@echo " main repo      | Step 8/8: Pushing updates..."
 	git push
 
