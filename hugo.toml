@@ -16,11 +16,11 @@ pygmentsCodefencesGuessSyntax = true
     # id = "XXX"
 
 [Params]
-  homeTitle = "Broken → Fixed" # Set a different text for the header on the home page
+  homeTitle = " " # Set a different text for the header on the home page
   subtitle = ""
   mainSections = ["post","posts"]
   logo = "img/avatar-icon.png" # Expecting square dimensions
-  favicon = "img/favicon.ico"
+  #favicon = "img/favicon.ico"
   dateFormat = "January 2, 2006"
   commit = false
   rss = true
@@ -37,7 +37,7 @@ pygmentsCodefencesGuessSyntax = true
 #  disclaimerText = "The opinions expressed herein are my own personal opinions and do not represent my employer’s view in any way."
 
 [[Params.bigimg]]
-  src = "img/banner.jpg"
+  src = "img/banner.png"
   desc = ""
   #position: see values of CSS background-position.
   position = "left;"
