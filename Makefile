@@ -1,5 +1,5 @@
 # Default target to show help if 'make' is run without arguments.
-.DEFAULT_GOAL := help
+.DEFAULT_GOAL := deploy
 
 # This ensures that 'deploy' and 'help' are treated as commands, not files.
 .PHONY: deploy help
