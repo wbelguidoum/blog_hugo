@@ -37,7 +37,7 @@ pygmentsCodefencesGuessSyntax = true
 #  disclaimerText = "The opinions expressed herein are my own personal opinions and do not represent my employer’s view in any way."
 
 [[Params.bigimg]]
-  src = "img/banner.png"
+  src = "/img/banner.png"
   desc = ""
   #position: see values of CSS background-position.
   position = "left;"
