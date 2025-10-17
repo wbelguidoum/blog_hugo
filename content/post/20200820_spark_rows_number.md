@@ -1,7 +1,7 @@
 ---
 title: "How to add row numbers to a Spark DataFrame?"
 date: 2020-08-20T00:00:00+01:00
-tags: ['spark', 'howto']
+tags: ['Tech: Spark', 'Format: Howto']
 ---  
 
 In this tutorial, we will explore a couple of ways to add a sequential consecutive row number to a dataframe.

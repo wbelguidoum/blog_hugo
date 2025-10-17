@@ -1,7 +1,7 @@
 ---
 title: "Spark DataFrame - two ways to count the number of rows per partition"
 date: 2020-08-15T00:00:00+01:00
-tags: ['spark', 'howto']
+tags: ['Tech: Spark', 'Format: Howto']
 ---
 
 Sometimes, we are required to compute the number of rows per each partition. To do this, there are two ways: 
