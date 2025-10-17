@@ -13,7 +13,7 @@ pygmentsCodefencesGuessSyntax = true
   [Services.Disqus]
     # Shortname = "XXX"
   [Services.googleAnalytics]
-    # id = "GTM-WBK2LV2N"
+    id = "G-7Y03B2CKE4"
 
 [Params]
   homeTitle = " " # Set a different text for the header on the home page
