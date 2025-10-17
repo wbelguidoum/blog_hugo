@@ -1,4 +1,4 @@
-  ---
+---
 title: "How to optimise loading partitioned JSON data in Spark ?"
 date: 2020-08-30T00:00:00+01:00
 tags: ['Tech: Spark', 'Topic: Optimisation', 'Format: Howto']
