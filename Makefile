@@ -5,12 +5,10 @@
 m :=
 
 clean_public:
-	
 	@echo "🧹 Step 1/8: Cleaning the public directory..."
 	rm -rf public/*
 
 build: clean_public
-	
 	@echo "🚀 Step 2/8: Building site with Hugo..."
 	hugo
 
@@ -37,7 +35,6 @@ endif
 	git push
 
 deploy:
-
 	@echo "\n Step 1: Building ..."
 	make build 
 	@echo "\n Step 2: Publishing ..."
