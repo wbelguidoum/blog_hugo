@@ -1,0 +1,749 @@
+
+
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+ 
+
+
+      <title>How to add row numbers to a Spark DataFrame? -  </title>
+
+  <meta name="description" content="In this tutorial, we will explore a couple of ways to add a sequential consecutive row number to a dataframe.
+For example, let this be our dataframe (taken from Spark: The Definitive Guide github repo):
+val df = spark.read.option(&#34;header&#34;, &#34;true&#34;).csv(&#34;.../data/flight-data/csv/*&#34;)
+&#43;-----------------&#43;-------------------&#43;-----&#43;
+|DEST_COUNTRY_NAME|ORIGIN_COUNTRY_NAME|count|
+&#43;-----------------&#43;-------------------&#43;-----&#43;
+|    United States|            Romania|    1|
+|    United States|            Ireland|  264|
+|    United States|              India|   69|
+|            Egypt|      United States|   24|
+|Equatorial Guinea|      United States|    1|
+&#43;-----------------&#43;-------------------&#43;-----&#43;
+only showing top 5 rows
+After adding a column containing the row number, the result should look like:">
+  <meta name="author" content="Wissem"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "Broken Backend",
+    
+    "url": "https:\/\/brokenbackend.blog\/"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/brokenbackend.blog\/"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/brokenbackend.blog\/",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/brokenbackend.blog\/post\/20200820_spark_rows_number\/",
+          "name": "How to add row numbers to a spark data frame?"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Wissem"
+  },
+  "headline": "How to add row numbers to a Spark DataFrame?",
+  "description" : "In this tutorial, we will explore a couple of ways to add a sequential consecutive row number to a dataframe.\nFor example, let this be our dataframe (taken from Spark: The Definitive Guide github repo):\nval df = spark.read.option(\u0026#34;header\u0026#34;, \u0026#34;true\u0026#34;).csv(\u0026#34;...\/data\/flight-data\/csv\/*\u0026#34;) \u002b-----------------\u002b-------------------\u002b-----\u002b |DEST_COUNTRY_NAME|ORIGIN_COUNTRY_NAME|count| \u002b-----------------\u002b-------------------\u002b-----\u002b | United States| Romania| 1| | United States| Ireland| 264| | United States| India| 69| | Egypt| United States| 24| |Equatorial Guinea| United States| 1| \u002b-----------------\u002b-------------------\u002b-----\u002b only showing top 5 rows After adding a column containing the row number, the result should look like:\n",
+  "inLanguage" : "en",
+  "wordCount":  1518 ,
+  "datePublished" : "2020-08-20T00:00:00\u002b01:00",
+  "dateModified" : "2020-08-20T00:00:00\u002b01:00",
+  "image" : "https:\/\/brokenbackend.blog\/img\/avatar-icon.png",
+  "keywords" : [ "Tech: Spark, Format: Howto" ],
+  "mainEntityOfPage" : "https:\/\/brokenbackend.blog\/post\/20200820_spark_rows_number\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/brokenbackend.blog\/",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/brokenbackend.blog\/img\/avatar-icon.png",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+
+<meta property="og:title" content="How to add row numbers to a Spark DataFrame?" />
+<meta property="og:description" content="In this tutorial, we will explore a couple of ways to add a sequential consecutive row number to a dataframe.
+For example, let this be our dataframe (taken from Spark: The Definitive Guide github repo):
+val df = spark.read.option(&#34;header&#34;, &#34;true&#34;).csv(&#34;.../data/flight-data/csv/*&#34;)
+&#43;-----------------&#43;-------------------&#43;-----&#43;
+|DEST_COUNTRY_NAME|ORIGIN_COUNTRY_NAME|count|
+&#43;-----------------&#43;-------------------&#43;-----&#43;
+|    United States|            Romania|    1|
+|    United States|            Ireland|  264|
+|    United States|              India|   69|
+|            Egypt|      United States|   24|
+|Equatorial Guinea|      United States|    1|
+&#43;-----------------&#43;-------------------&#43;-----&#43;
+only showing top 5 rows
+After adding a column containing the row number, the result should look like:">
+<meta property="og:image" content="https://brokenbackend.blog/img/avatar-icon.png" />
+<meta property="og:url" content="https://brokenbackend.blog/post/20200820_spark_rows_number/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Broken Backend" />
+
+  <meta name="twitter:title" content="How to add row numbers to a Spark DataFrame?" />
+  <meta name="twitter:description" content="In this tutorial, we will explore a couple of ways to add a sequential consecutive row number to a dataframe.
+For example, let this be our dataframe (taken from Spark: The Definitive Guide github repo …">
+  <meta name="twitter:image" content="https://brokenbackend.blog/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="generator" content="Hugo 0.151.0">
+  <link rel="alternate" href="https://brokenbackend.blog/index.xml" type="application/rss+xml" title="Broken Backend"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.css" integrity="sha384-3UiQGuEI4TTMaFmGIZumfRPtfKQ3trwQE2JgosJxCnGmQpL/lJdjpcHkaaFwHlcI" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.6.0/css/all.css" integrity="sha384-h/hnnw1Bi4nbpD6kE7nYfCXzovi622sY5WBxww8ARKwpdLj5kUWjRuyiXaD1U2JT" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous"><link rel="stylesheet" href="https://brokenbackend.blog/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://brokenbackend.blog/css/highlight.min.css" /><link rel="stylesheet" href="https://brokenbackend.blog/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+<link rel="icon" type="image/png" href="/img/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/img/favicon.svg" />
+<link rel="shortcut icon" href="/img/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="BrokenBackend Blog" />
+<link rel="manifest" href="/img/site.webmanifest" />
+
+
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WBK2LV2N');</script>
+
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-7Y03B2CKE4"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-7Y03B2CKE4');
+        }
+      </script>
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://brokenbackend.blog/">Broken Backend</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/page/about/">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    
+      <div class="avatar-container">
+        <div class="avatar-img-border">
+          <a title="Broken Backend" href="https://brokenbackend.blog/">
+            <img class="avatar-img" src="https://brokenbackend.blog/img/avatar-icon.png" alt="Broken Backend" />
+           
+          </a>
+        </div>
+      </div>
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              
+                <h1>How to add row numbers to a Spark DataFrame?</h1>
+              
+              
+              
+              
+                <span class="post-meta">
+  
+  
+  <i class="fas fa-calendar"></i>&nbsp;Posted on August 20, 2020
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;8&nbsp;minutes
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;1518&nbsp;words
+  
+  
+    
+      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Wissem
+    
+  
+  
+</span>
+
+
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>In this tutorial, we will explore a couple of ways to add a sequential consecutive row number to a dataframe.</p>
+<p>For example, let this be our dataframe (taken from <a href="https://github.com/databricks/Spark-The-Definitive-Guide"><strong>Spark: The Definitive Guide github repo</strong></a>):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-scala" data-lang="scala"><span class="line"><span class="cl"><span class="k">val</span> <span class="n">df</span> <span class="k">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">option</span><span class="o">(</span><span class="s">&#34;header&#34;</span><span class="o">,</span> <span class="s">&#34;true&#34;</span><span class="o">).</span><span class="n">csv</span><span class="o">(</span><span class="s">&#34;.../data/flight-data/csv/*&#34;</span><span class="o">)</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">+-----------------+-------------------+-----+
+</span></span><span class="line"><span class="cl">|DEST_COUNTRY_NAME|ORIGIN_COUNTRY_NAME|count|
+</span></span><span class="line"><span class="cl">+-----------------+-------------------+-----+
+</span></span><span class="line"><span class="cl">|    United States|            Romania|    1|
+</span></span><span class="line"><span class="cl">|    United States|            Ireland|  264|
+</span></span><span class="line"><span class="cl">|    United States|              India|   69|
+</span></span><span class="line"><span class="cl">|            Egypt|      United States|   24|
+</span></span><span class="line"><span class="cl">|Equatorial Guinea|      United States|    1|
+</span></span><span class="line"><span class="cl">+-----------------+-------------------+-----+
+</span></span><span class="line"><span class="cl">only showing top 5 rows
+</span></span></code></pre></div><p>After adding a column containing the row number, the result should look like:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">+-----------------+-------------------+-----+-------+
+</span></span><span class="line"><span class="cl">|DEST_COUNTRY_NAME|ORIGIN_COUNTRY_NAME|count|row_num|
+</span></span><span class="line"><span class="cl">+-----------------+-------------------+-----+-------+
+</span></span><span class="line"><span class="cl">|    United States|            Romania|    1|      1|
+</span></span><span class="line"><span class="cl">|    United States|            Ireland|  264|      2|
+</span></span><span class="line"><span class="cl">|    United States|              India|   69|      3|
+</span></span><span class="line"><span class="cl">|            Egypt|      United States|   24|      4|
+</span></span><span class="line"><span class="cl">|Equatorial Guinea|      United States|    1|      5|
+</span></span><span class="line"><span class="cl">+-----------------+-------------------+-----+-------+
+</span></span><span class="line"><span class="cl">only showing top 5 rows
+</span></span></code></pre></div><ul>
+<li><code>row_num</code> will contain a sequential consecutive row number that will cover the whole dataframe.</li>
+</ul>
+<h2 id="the-ugly-way-using-window-functions">The Ugly Way: Using Window functions</h2>
+<hr>
+<p>Starting from Spark 1.4, a new feature called Window functions has been introduced to Spark SQL (see <a href="https://databricks.com/fr/blog/2015/07/15/introducing-window-functions-in-spark-sql.html"><strong>Databricks blog post</strong></a>). This feature allows to apply aggregations over a dataframe, while returning an output with the same number of rows as the input (unlike grouping aggregations).</p>
+<p>Using window functions can be a straightforward way to add sequential consecutive row numbers to a dataframe, by using a specific window function called .. <code>row_number()</code>.</p>
+<p>This can be done in two steps:</p>
+<h4 id="step-1-define-a-window-specification">Step 1: define a window specification</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-scala" data-lang="scala"><span class="line"><span class="cl"><span class="k">import</span> <span class="nn">org.apache.spark.sql.expressions.Window</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">val</span> <span class="n">windSpec</span> <span class="k">=</span> <span class="nc">Window</span><span class="o">.</span><span class="n">partitionBy</span><span class="o">(</span><span class="n">lit</span><span class="o">(</span><span class="mi">0</span><span class="o">))</span>
+</span></span><span class="line"><span class="cl">                     <span class="o">.</span><span class="n">orderBy</span><span class="o">(</span><span class="n">monotonically_increasing_id</span><span class="o">())</span>
+</span></span></code></pre></div><p>In our window specification we answered two questions:</p>
+<ul>
+<li>How to partition the data (<code>partitionBy</code>): In order to have a consecutive and sequential row id that covers the entire dataframe, we need to partition in a way that all the data ends up in one single partition (and this is why it is ugly!).</li>
+<li>How to order elements inside the same partition (<code>orderBy</code>): So as to preserve the natural order, we will sort the dataframe using <code>monotonically_increasing_id()</code>. This function generates an ordered and unique but not consecutive row id (we will see more about this function in the next section).</li>
+</ul>
+<h4 id="step-2-apply-row_number-to-the-dataframe-using-the-window-specification-that-we-have-defined-in-step-1">Step 2: apply <code>row_number()</code> to the dataframe using the window specification that we have defined in Step 1</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-scala" data-lang="scala"><span class="line"><span class="cl"><span class="k">val</span> <span class="n">df2</span> <span class="k">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="o">(</span><span class="s">&#34;row_num&#34;</span><span class="o">,</span> <span class="n">row_number</span><span class="o">().</span><span class="n">over</span><span class="o">(</span><span class="n">windSpec</span><span class="o">))</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">+-----------------+-------------------+-----+-------+
+</span></span><span class="line"><span class="cl">|DEST_COUNTRY_NAME|ORIGIN_COUNTRY_NAME|count|row_num|
+</span></span><span class="line"><span class="cl">+-----------------+-------------------+-----+-------+
+</span></span><span class="line"><span class="cl">|    United States|            Romania|    1|      1|
+</span></span><span class="line"><span class="cl">|    United States|            Ireland|  264|      2|
+</span></span><span class="line"><span class="cl">|    United States|              India|   69|      3|
+</span></span><span class="line"><span class="cl">|            Egypt|      United States|   24|      4|
+</span></span><span class="line"><span class="cl">|Equatorial Guinea|      United States|    1|      5|
+</span></span><span class="line"><span class="cl">+-----------------+-------------------+-----+-------+
+</span></span><span class="line"><span class="cl">only showing top 5 rows
+</span></span></code></pre></div><p>Done!</p>
+<p>Now, we have a column containing a consecutive row number. However, if we take a closer look at the result, and show the first and the last row, along with the partition id, we will observe this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-scala" data-lang="scala"><span class="line"><span class="cl"><span class="k">val</span> <span class="n">df3</span> <span class="k">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">withColumn</span><span class="o">(</span><span class="s">&#34;partition_id&#34;</span><span class="o">,</span> <span class="n">spark_partition_id</span><span class="o">()).</span><span class="n">filter</span><span class="o">(</span><span class="n">expr</span><span class="o">(</span><span class="s">&#34;row_num in (1, 1502)&#34;</span><span class="o">))</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">+-----------------+-------------------+-----+-------+------------+
+</span></span><span class="line"><span class="cl">|DEST_COUNTRY_NAME|ORIGIN_COUNTRY_NAME|count|row_num|partition_id|
+</span></span><span class="line"><span class="cl">+-----------------+-------------------+-----+-------+------------+
+</span></span><span class="line"><span class="cl">|    United States|            Romania|    1|      1|         191|
+</span></span><span class="line"><span class="cl">|           Greece|      United States|   20|   1502|         191|
+</span></span><span class="line"><span class="cl">+-----------------+-------------------+-----+-------+------------+
+</span></span></code></pre></div><p>As I said before, this method requires to group all the data in one single partition (here the chosen partition was n° 191).</p>
+<p>This constraint takes away one of the major benefits of Spark, namely, the parallel computation. Because, only one task will be (sequentially) executed in order to compute the row number.</p>
+<p>In the next section, we will try explore another way which is a little bit longer, but which tries to take more advantage of the parallel and distributed computation offered by Spark</p>
+<h2 id="the-other-way">The Other Way</h2>
+<hr>
+<p>In this method, we will associate each row with its offset in the partition, and then, we will compute a global offset for each partition, and finally we will add up the two offsets to get the row number.</p>
+<p>This can be done in 4 steps:</p>
+<h4 id="step-1">Step 1</h4>
+<p>Similar to the last section, we will use the <code>monotonically_increasing_id()</code> function to associate a unique identifier to each row. Let’s call it <code>row_id</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-scala" data-lang="scala"><span class="line"><span class="cl"><span class="k">val</span> <span class="n">df2</span> <span class="k">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="o">(</span><span class="s">&#34;row_id&#34;</span><span class="o">,</span> <span class="n">monotonically_increasing_id</span><span class="o">())</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">+-----------------+-------------------+-----+------+
+</span></span><span class="line"><span class="cl">|DEST_COUNTRY_NAME|ORIGIN_COUNTRY_NAME|count|row_id|
+</span></span><span class="line"><span class="cl">+-----------------+-------------------+-----+------+
+</span></span><span class="line"><span class="cl">|    United States|            Romania|    1|     0|
+</span></span><span class="line"><span class="cl">|    United States|            Ireland|  264|     1|
+</span></span><span class="line"><span class="cl">|    United States|              India|   69|     2|
+</span></span><span class="line"><span class="cl">|            Egypt|      United States|   24|     3|
+</span></span><span class="line"><span class="cl">|Equatorial Guinea|      United States|    1|     4|
+</span></span><span class="line"><span class="cl">+-----------------+-------------------+-----+------+
+</span></span><span class="line"><span class="cl">only showing top 5 rows
+</span></span></code></pre></div><p>At the first sight, the result looks almost like what we are looking for, but it is not really:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-scala" data-lang="scala"><span class="line"><span class="cl"><span class="n">df2</span><span class="o">.</span><span class="n">orderBy</span><span class="o">(</span>&#39;row_id<span class="o">.</span><span class="n">desc</span><span class="o">).</span><span class="n">show</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">+--------------------+--------------------+-----+-----------+
+</span></span><span class="line"><span class="cl">|   DEST_COUNTRY_NAME| ORIGIN_COUNTRY_NAME|count|     row_id|
+</span></span><span class="line"><span class="cl">+--------------------+--------------------+-----+-----------+
+</span></span><span class="line"><span class="cl">|              Greece|       United States|   20|42949673200|
+</span></span><span class="line"><span class="cl">|Bonaire, Sint Eus...|       United States|   62|42949673199|
+</span></span><span class="line"><span class="cl">|       United States|               Haiti|  193|42949673198|
+</span></span><span class="line"><span class="cl">|       United States|Saint Kitts and N...|  123|42949673197|
+</span></span><span class="line"><span class="cl">|       United States|       French Guiana|    4|42949673196|
+</span></span><span class="line"><span class="cl">+--------------------+--------------------+-----+-----------+
+</span></span><span class="line"><span class="cl">only showing top 5 rows
+</span></span></code></pre></div><p>The <code>row_id</code> is way bigger than the total count of this dataset (which is 1502 rows), and that is because the id generated by <code>monotonically_increatsing_id()</code> is (bitwise) composed of two parts:
+<img src="/content/post/20200820_spark_rows_number/monotonically_increasing_id.jpg" alt="Monotonically Increasing Id"></p>
+<h4 id="step-2">Step 2</h4>
+<p>Let’s separate the two parts into two different columns:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-scala" data-lang="scala"><span class="line"><span class="cl"><span class="k">val</span> <span class="n">df3</span> <span class="k">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">withColumn</span><span class="o">(</span><span class="s">&#34;partition_id&#34;</span><span class="o">,</span> <span class="n">shiftRight</span><span class="o">(</span>&#39;row_id<span class="o">,</span><span class="mi">33</span><span class="o">))</span>
+</span></span><span class="line"><span class="cl">             <span class="o">.</span><span class="n">withColumn</span><span class="o">(</span><span class="s">&#34;row_offset&#34;</span><span class="o">,</span> &#39;row_id<span class="o">.</span><span class="n">bitwiseAND</span><span class="o">(</span><span class="mi">2147483647</span><span class="o">))</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">+-----------------+-------------------+-----+------+------------+----------+
+</span></span><span class="line"><span class="cl">|DEST_COUNTRY_NAME|ORIGIN_COUNTRY_NAME|count|row_id|partition_id|row_offset|
+</span></span><span class="line"><span class="cl">+-----------------+-------------------+-----+------+------------+----------+
+</span></span><span class="line"><span class="cl">|    United States|            Romania|    1|     0|           0|         0|
+</span></span><span class="line"><span class="cl">|    United States|            Ireland|  264|     1|           0|         1|
+</span></span><span class="line"><span class="cl">|    United States|              India|   69|     2|           0|         2|
+</span></span><span class="line"><span class="cl">|            Egypt|      United States|   24|     3|           0|         3|
+</span></span><span class="line"><span class="cl">|Equatorial Guinea|      United States|    1|     4|           0|         4|
+</span></span><span class="line"><span class="cl">+-----------------+-------------------+-----+------+------------+----------+
+</span></span><span class="line"><span class="cl">only showing top 5 rows
+</span></span></code></pre></div><ul>
+<li><code>shiftRight</code>: is used to extract the partition id, by shifting the id by 33 bits to the right (equivalent to the <code>&gt;&gt;</code> operator).</li>
+<li><code>bitwiseAnd</code>: is used to isolate the row offset by applying a bit mask (<code>1111111111111111111111111111111</code>) that zeroes the upper 31 bits and keeps the 33 lower bits. If you wonder where does this number (<code>2147483647</code>) come from, it just the decimal representation of the mask.</li>
+</ul>
+<h4 id="step-3">Step 3</h4>
+<p>Now that we have calculated a local offset for each row, in the next step, we will calculate the global offset for each partition. Let&rsquo;s start by calculating the size of each partition:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-scala" data-lang="scala"><span class="line"><span class="cl"><span class="k">val</span> <span class="n">partitions_size</span> <span class="k">=</span> <span class="n">df3</span><span class="o">.</span><span class="n">groupBy</span><span class="o">(</span><span class="s">&#34;partition_id&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">                         <span class="o">.</span><span class="n">count</span><span class="o">()</span>
+</span></span><span class="line"><span class="cl">                         <span class="o">.</span><span class="n">withColumnRenamed</span><span class="o">(</span><span class="s">&#34;count&#34;</span><span class="o">,</span> <span class="s">&#34;partition_size&#34;</span><span class="o">)</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">+------------+--------------+
+</span></span><span class="line"><span class="cl">|partition_id|partition_size|
+</span></span><span class="line"><span class="cl">+------------+--------------+
+</span></span><span class="line"><span class="cl">|           0|           254|
+</span></span><span class="line"><span class="cl">|           5|           240|
+</span></span><span class="line"><span class="cl">|           1|           255|
+</span></span><span class="line"><span class="cl">|           3|           249|
+</span></span><span class="line"><span class="cl">|           2|           254|
+</span></span><span class="line"><span class="cl">|           4|           244|
+</span></span><span class="line"><span class="cl">+------------+--------------+
+</span></span></code></pre></div><p>At this point, we have calculated the size of each partition (the number of rows per partition). In order to calculate the global offset of each partition, we will do an aggregation over a window specification, so that we compute for each partition the sum of sizes of its preceding partitions:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-scala" data-lang="scala"><span class="line"><span class="cl"><span class="k">import</span> <span class="nn">org.apache.spark.sql.expressions.Window</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">val</span> <span class="n">windowSpec</span> <span class="k">=</span> <span class="nc">Window</span><span class="o">.</span><span class="n">orderBy</span><span class="o">(</span><span class="s">&#34;partition_id&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">                       <span class="o">.</span><span class="n">rowsBetween</span><span class="o">(</span><span class="nc">Window</span><span class="o">.</span><span class="n">unboundedPreceding</span><span class="o">,</span> <span class="o">-</span><span class="mi">1</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">val</span> <span class="n">partitions_offset</span> <span class="k">=</span> <span class="n">partitions_size</span><span class="o">.</span><span class="n">withColumn</span><span class="o">(</span><span class="s">&#34;partition_offset&#34;</span><span class="o">,</span> <span class="n">sum</span><span class="o">(</span><span class="s">&#34;partition_size&#34;</span><span class="o">).</span><span class="n">over</span><span class="o">(</span><span class="n">windowSpec</span><span class="o">))</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">+------------+--------------+----------------+                                  
+</span></span><span class="line"><span class="cl">|partition_id|partition_size|partition_offset|
+</span></span><span class="line"><span class="cl">+------------+--------------+----------------+
+</span></span><span class="line"><span class="cl">|           0|           254|            null|
+</span></span><span class="line"><span class="cl">|           1|           255|             254|
+</span></span><span class="line"><span class="cl">|           2|           254|             509|
+</span></span><span class="line"><span class="cl">|           3|           249|             763|
+</span></span><span class="line"><span class="cl">|           4|           244|            1012|
+</span></span><span class="line"><span class="cl">|           5|           240|            1256|
+</span></span><span class="line"><span class="cl">+------------+--------------+----------------+
+</span></span></code></pre></div><ul>
+<li><code>rowsBetween</code>: in the last section we have seen that a window specification answered two questions: how to partition the data and how to order the data. There is a third question that can be answered: how to frame the data i.e which rows will be aggregated together in order to compute the current row?</li>
+<li>In our case, we used <code>rowsBetween(Window.unboundedPreceding, -1)</code> to indicate that for the current row, we need to aggregate all the preceding rows.</li>
+<li><code>orderBy</code>: we have already seen this function, it will define how to order the rows.</li>
+</ul>
+<p>We are almost there! We need to take care of the partition n°0, by setting its offset to 0.</p>
+<p>To do so, we will use a conditional column definition (<strong>when(</strong>&lt;condition&gt;, &lt;column definition 1&gt; <strong>).otherwise(</strong>&lt;column definition 2&gt; <strong>)</strong>):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-scala" data-lang="scala"><span class="line"><span class="cl"><span class="k">val</span> <span class="n">partitions_offset</span> <span class="k">=</span> <span class="n">partitions_size</span><span class="o">.</span><span class="n">withColumn</span><span class="o">(</span><span class="s">&#34;partition_offset&#34;</span><span class="o">,</span> 
+</span></span><span class="line"><span class="cl">                <span class="n">when</span><span class="o">(</span><span class="n">expr</span><span class="o">(</span><span class="s">&#34;partition_id = 0&#34;</span><span class="o">),</span> <span class="n">lit</span><span class="o">(</span><span class="mi">0</span><span class="o">))</span>
+</span></span><span class="line"><span class="cl">                <span class="o">.</span><span class="n">otherwise</span><span class="o">(</span><span class="n">sum</span><span class="o">(</span><span class="s">&#34;partition_size&#34;</span><span class="o">).</span><span class="n">over</span><span class="o">(</span><span class="n">windowSpec</span><span class="o">)))</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">+------------+--------------+----------------+
+</span></span><span class="line"><span class="cl">|partition_id|partition_size|partition_offset|
+</span></span><span class="line"><span class="cl">+------------+--------------+----------------+
+</span></span><span class="line"><span class="cl">|           0|           254|               0|
+</span></span><span class="line"><span class="cl">|           1|           255|             254|
+</span></span><span class="line"><span class="cl">|           2|           254|             509|
+</span></span><span class="line"><span class="cl">|           3|           249|             763|
+</span></span><span class="line"><span class="cl">|           4|           244|            1012|
+</span></span><span class="line"><span class="cl">|           5|           240|            1256|
+</span></span><span class="line"><span class="cl">+------------+--------------+----------------+
+</span></span></code></pre></div><h4 id="step-4">Step 4</h4>
+<p>From this point, computing the row number can be done by adding the row offset to the partition offset. That is why we firstly need to join the main dataframe with the <code>partitions_offset</code> dataframe that we calculated in Step 3:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-scala" data-lang="scala"><span class="line"><span class="cl"><span class="k">val</span> <span class="n">df4</span> <span class="k">=</span> <span class="n">df3</span><span class="o">.</span><span class="n">join</span><span class="o">(</span><span class="n">broadcast</span><span class="o">(</span><span class="n">partitions_offset</span><span class="o">),</span> <span class="s">&#34;partition_id&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">             <span class="o">.</span><span class="n">withColumn</span><span class="o">(</span><span class="s">&#34;row_num&#34;</span><span class="o">,</span> &#39;partition_offset<span class="o">+</span>&#39;row_offset<span class="o">+</span><span class="mi">1</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">             <span class="o">.</span><span class="n">drop</span><span class="o">(</span><span class="s">&#34;partition_id&#34;</span><span class="o">,</span> <span class="s">&#34;row_id&#34;</span><span class="o">,</span> <span class="s">&#34;row_offset&#34;</span><span class="o">,</span> <span class="s">&#34;partition_size&#34;</span><span class="o">,</span> <span class="s">&#34;partition_offset&#34;</span><span class="o">)</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">+-----------------+-------------------+-----+-------+
+</span></span><span class="line"><span class="cl">|DEST_COUNTRY_NAME|ORIGIN_COUNTRY_NAME|count|row_num|
+</span></span><span class="line"><span class="cl">+-----------------+-------------------+-----+-------+
+</span></span><span class="line"><span class="cl">|    United States|            Romania|    1|      1|
+</span></span><span class="line"><span class="cl">|    United States|            Ireland|  264|      2|
+</span></span><span class="line"><span class="cl">|    United States|              India|   69|      3|
+</span></span><span class="line"><span class="cl">|            Egypt|      United States|   24|      4|
+</span></span><span class="line"><span class="cl">|Equatorial Guinea|      United States|    1|      5|
+</span></span><span class="line"><span class="cl">+-----------------+-------------------+-----+-------+
+</span></span><span class="line"><span class="cl">only showing top 5 rows
+</span></span></code></pre></div><ul>
+<li><code>broadcast</code>: before joining, we added a broadcast hint so that the <code>partitions_offset</code> dataframe gets broadcasted through the Spark cluster to avoid shuffles.</li>
+<li>We needed to adjust the calculation by adding 1 to the offsets so that <code>row_num</code> starts from 1.</li>
+<li>We used <code>drop()</code> to clean out the intermediary columns.</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<hr>
+<p>In this tutorial, we explored two different ways to add a sequential consecutive row numbers to a dataframe. The first one does not use the parallelism that Spark offers. While the second one tries to parallelize the computation.</p>
+<p>I’ve made some comparisons of execution times using 9 datasets with different number of rows. I run my tests on a local setting (8 cores).</p>
+<p>The numbers talk for themselves:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Rows count</th>
+          <th>Method 1 (in seconds)</th>
+          <th>Method 2 (in seconds)</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>669 960</td>
+          <td>8,5</td>
+          <td>1,6</td>
+      </tr>
+      <tr>
+          <td>1 339 920</td>
+          <td>14</td>
+          <td>1,7</td>
+      </tr>
+      <tr>
+          <td>2 009 880</td>
+          <td>19</td>
+          <td>2,6</td>
+      </tr>
+      <tr>
+          <td>2 679 840</td>
+          <td>26</td>
+          <td>2,7</td>
+      </tr>
+      <tr>
+          <td>3 349 800</td>
+          <td>32</td>
+          <td>3,8</td>
+      </tr>
+      <tr>
+          <td>4 019 760</td>
+          <td>38</td>
+          <td>3,8</td>
+      </tr>
+      <tr>
+          <td>4 689 720</td>
+          <td>46</td>
+          <td>3,9</td>
+      </tr>
+      <tr>
+          <td>5 359 680</td>
+          <td>51</td>
+          <td>5</td>
+      </tr>
+      <tr>
+          <td>10 719 360</td>
+          <td>97</td>
+          <td>12</td>
+      </tr>
+  </tbody>
+</table>
+<p>Unsurprisingly, the first method does not scale, and the processing time adds up due to the sequential execution. Here&rsquo;s a chart with the same data:
+<img src="/content/post/20200820_spark_rows_number/chart.png" alt="Comparison of execution times"></p>
+<p>Thank you for reading this tutorial!</p>
+<p>Don’t hesitate to share your insight in the comment section.</p>
+
+
+        
+          <div class="blog-tags">
+            
+              
+              <a href="https://brokenbackend.blog/tags/tech-spark/">Tech: Spark</a>&nbsp;
+            
+              
+              <a href="https://brokenbackend.blog/tags/format-howto/">Format: Howto</a>&nbsp;
+            
+          </div>
+        
+
+        
+
+        
+          
+            
+          
+
+          
+                  <h4 class="see-also">See also</h4>
+                  <ul>
+                
+                
+                    <li><a href="/post/20200830_spark_load_partitioned_json/">How to optimise loading partitioned JSON data in Spark ?</a></li>
+                
+                    <li><a href="/post/20200814_spark_count_per_partition/">Spark DataFrame - two ways to count the number of rows per partition</a></li>
+                
+              </ul>
+
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://brokenbackend.blog/post/20200814_spark_count_per_partition/" data-toggle="tooltip" data-placement="top" title="Spark DataFrame - two ways to count the number of rows per partition">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://brokenbackend.blog/post/20200830_spark_load_partitioned_json/" data-toggle="tooltip" data-placement="top" title="How to optimise loading partitioned JSON data in Spark ?">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+      
+      
+      
+      
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      <footer>
+  <div class="container">
+    
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+		
+		  <a href="mailto:wissem@brokenbackend.blog" title="Email me">
+		
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+		
+		  <a href="https://github.com/wbelguidoum" title="GitHub">
+		
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+		
+		  <a href="https://linkedin.com/in/wbelguidoum" title="LinkedIn">
+		
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+		
+		  <a href="https://www.youtube.com/@wissembelguidoum" title="Youtube">
+		
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-youtube fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="brokenbackend.blog">Wissem</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;&copy;
+          
+            2025
+          
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://brokenbackend.blog/">Broken Backend</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.151.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.js" integrity="sha384-G0zcxDFp5LWZtDuRMnBkk3EphCK1lhEf4UEyEM693ka574TZGwo4IWwS6QLzM/2t" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.slim.min.js" integrity="sha384-w5y/xIeYixWvfM+A1cEbmHPURnvyqmVg5eVENruEdDjcyRLUSNej7512JQGspFUr" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
+<script src="https://brokenbackend.blog/js/main.js"></script>
+<script src="https://brokenbackend.blog/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> $(document).ready(function() {$("pre.chroma").css("padding","0");}); </script><script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script><script src="https://brokenbackend.blog/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+
+
+
+
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WBK2LV2N"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+
+    
+  </body>
+</html>
+

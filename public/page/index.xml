@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pages on Broken Backend</title>
+    <link>https://brokenbackend.blog/page/</link>
+    <description>Recent content in Pages on Broken Backend</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <managingEditor>wissem@brokenbackend.blog (Wissem)</managingEditor>
+    <webMaster>wissem@brokenbackend.blog (Wissem)</webMaster>
+    <atom:link href="https://brokenbackend.blog/page/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>About This Blog</title>
+      <link>https://brokenbackend.blog/page/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>wissem@brokenbackend.blog (Wissem)</author>
+      <guid>https://brokenbackend.blog/page/about/</guid>
+      <description>&lt;p&gt;This blog, &lt;strong&gt;&lt;code&gt;brokenbackend.blog&lt;/code&gt;&lt;/strong&gt;, is built on a single premise: &lt;strong&gt;We learn to fix vulnerabilities by first understanding how they break.&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;I believe the most effective way to master backend development and security is through shared experiences and hands-on practice. We learn through &lt;strong&gt;Storytelling&lt;/strong&gt;, and I try to turn complex concepts into memorable &lt;strong&gt;narrative case studies&lt;/strong&gt; (like &lt;em&gt;&amp;ldquo;The FamShare Story&amp;rdquo;&lt;/em&gt;).&lt;/p&gt;&#xA;&lt;p&gt;Every vulnerability, fix, and best practice is backed by &lt;strong&gt;real, runnable code&lt;/strong&gt; in Go, making you an active participant.&#xA;My ultimate pursuit is to teach the best practices necessary for building backend systems that are both &lt;strong&gt;reliable and secure&lt;/strong&gt;.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

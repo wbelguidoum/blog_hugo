@@ -1,0 +1,619 @@
+
+
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+ 
+
+
+      <title>How to optimise loading partitioned JSON data in Spark ? -  </title>
+
+  <meta name="description" content="In this tutorial we will explore ways to optimise loading partitioned JSON data in Spark.
+I have used the SF Bay Area Bike Share dataset, you can find it here. The original data (status.csv) have gone through few transformations. The result looks like:
+
+Loading from partitioned JSON files
+
+We will load the data filtered by station and month :
+val df1 = spark.read
+	.json(&#34;file:///data/bike-data-big/partitioned_status.json&#34;)
+	.filter(&#34;station_id = 10 and (month in (&#39;2013-08&#39;, &#39;2013-09&#39;))&#34;)
+Despite the fact that the code above does not contain any action yet, Spark starts three jobs that took few minutes to complete (on a local setting, with 8 cores and 32 Gigs of RAM):
+">
+  <meta name="author" content="Wissem"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "Broken Backend",
+    
+    "url": "https:\/\/brokenbackend.blog\/"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/brokenbackend.blog\/"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/brokenbackend.blog\/",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/brokenbackend.blog\/post\/20200830_spark_load_partitioned_json\/",
+          "name": "How to optimise loading partitioned JSON data in spark ?"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Wissem"
+  },
+  "headline": "How to optimise loading partitioned JSON data in Spark ?",
+  "description" : "In this tutorial we will explore ways to optimise loading partitioned JSON data in Spark.\nI have used the SF Bay Area Bike Share dataset, you can find it here. The original data (status.csv) have gone through few transformations. The result looks like:\nLoading from partitioned JSON files We will load the data filtered by station and month :\nval df1 = spark.read .json(\u0026#34;file:\/\/\/data\/bike-data-big\/partitioned_status.json\u0026#34;) .filter(\u0026#34;station_id = 10 and (month in (\u0026#39;2013-08\u0026#39;, \u0026#39;2013-09\u0026#39;))\u0026#34;) Despite the fact that the code above does not contain any action yet, Spark starts three jobs that took few minutes to complete (on a local setting, with 8 cores and 32 Gigs of RAM): ",
+  "inLanguage" : "en",
+  "wordCount":  1321 ,
+  "datePublished" : "2020-08-30T00:00:00\u002b01:00",
+  "dateModified" : "2020-08-30T00:00:00\u002b01:00",
+  "image" : "https:\/\/brokenbackend.blog\/img\/avatar-icon.png",
+  "keywords" : [ "Tech: Spark, Topic: Optimisation, Format: Howto" ],
+  "mainEntityOfPage" : "https:\/\/brokenbackend.blog\/post\/20200830_spark_load_partitioned_json\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/brokenbackend.blog\/",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/brokenbackend.blog\/img\/avatar-icon.png",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+
+<meta property="og:title" content="How to optimise loading partitioned JSON data in Spark ?" />
+<meta property="og:description" content="In this tutorial we will explore ways to optimise loading partitioned JSON data in Spark.
+I have used the SF Bay Area Bike Share dataset, you can find it here. The original data (status.csv) have gone through few transformations. The result looks like:
+
+Loading from partitioned JSON files
+
+We will load the data filtered by station and month :
+val df1 = spark.read
+	.json(&#34;file:///data/bike-data-big/partitioned_status.json&#34;)
+	.filter(&#34;station_id = 10 and (month in (&#39;2013-08&#39;, &#39;2013-09&#39;))&#34;)
+Despite the fact that the code above does not contain any action yet, Spark starts three jobs that took few minutes to complete (on a local setting, with 8 cores and 32 Gigs of RAM):
+">
+<meta property="og:image" content="https://brokenbackend.blog/img/avatar-icon.png" />
+<meta property="og:url" content="https://brokenbackend.blog/post/20200830_spark_load_partitioned_json/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Broken Backend" />
+
+  <meta name="twitter:title" content="How to optimise loading partitioned JSON data in Spark ?" />
+  <meta name="twitter:description" content="In this tutorial we will explore ways to optimise loading partitioned JSON data in Spark.
+I have used the SF Bay Area Bike Share dataset, you can find it here. The original data (status.csv) have gone …">
+  <meta name="twitter:image" content="https://brokenbackend.blog/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="generator" content="Hugo 0.151.0">
+  <link rel="alternate" href="https://brokenbackend.blog/index.xml" type="application/rss+xml" title="Broken Backend"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.css" integrity="sha384-3UiQGuEI4TTMaFmGIZumfRPtfKQ3trwQE2JgosJxCnGmQpL/lJdjpcHkaaFwHlcI" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.6.0/css/all.css" integrity="sha384-h/hnnw1Bi4nbpD6kE7nYfCXzovi622sY5WBxww8ARKwpdLj5kUWjRuyiXaD1U2JT" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous"><link rel="stylesheet" href="https://brokenbackend.blog/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://brokenbackend.blog/css/highlight.min.css" /><link rel="stylesheet" href="https://brokenbackend.blog/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+<link rel="icon" type="image/png" href="/img/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/img/favicon.svg" />
+<link rel="shortcut icon" href="/img/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="BrokenBackend Blog" />
+<link rel="manifest" href="/img/site.webmanifest" />
+
+
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WBK2LV2N');</script>
+
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-7Y03B2CKE4"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-7Y03B2CKE4');
+        }
+      </script>
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://brokenbackend.blog/">Broken Backend</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/page/about/">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    
+      <div class="avatar-container">
+        <div class="avatar-img-border">
+          <a title="Broken Backend" href="https://brokenbackend.blog/">
+            <img class="avatar-img" src="https://brokenbackend.blog/img/avatar-icon.png" alt="Broken Backend" />
+           
+          </a>
+        </div>
+      </div>
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              
+                <h1>How to optimise loading partitioned JSON data in Spark ?</h1>
+              
+              
+              
+              
+                <span class="post-meta">
+  
+  
+  <i class="fas fa-calendar"></i>&nbsp;Posted on August 30, 2020
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;7&nbsp;minutes
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;1321&nbsp;words
+  
+  
+    
+      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Wissem
+    
+  
+  
+</span>
+
+
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>In this tutorial we will explore ways to optimise loading partitioned JSON data in Spark.</p>
+<p>I have used the SF Bay Area Bike Share dataset, you can find it <a href="https://www.kaggle.com/benhamner/sf-bay-area-bike-share/data#"><strong>here</strong></a>. The original data (<em>status.csv</em>) have gone through few transformations. The result looks like:</p>
+<p><img src="/content/post/20200830_spark_load_partitioned_json/tree.png" alt="Partitioned JSON data"></p>
+<h2 id="loading-from-partitioned-json-files">Loading from partitioned JSON files</h2>
+<hr>
+<p>We will load the data filtered by station and month :</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-scala" data-lang="scala"><span class="line"><span class="cl"><span class="k">val</span> <span class="n">df1</span> <span class="k">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span>
+</span></span><span class="line"><span class="cl">	<span class="o">.</span><span class="n">json</span><span class="o">(</span><span class="s">&#34;file:///data/bike-data-big/partitioned_status.json&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">	<span class="o">.</span><span class="n">filter</span><span class="o">(</span><span class="s">&#34;station_id = 10 and (month in (&#39;2013-08&#39;, &#39;2013-09&#39;))&#34;</span><span class="o">)</span>
+</span></span></code></pre></div><p>Despite the fact that the code above does not contain any action yet, Spark starts three jobs that took few minutes to complete (on a local setting, with 8 cores and 32 Gigs of RAM):
+<img src="/content/post/20200830_spark_load_partitioned_json/slow_json_loading.png" alt="Slow JSON Loading"></p>
+<ul>
+<li>Job 0 and Job 1 : Spark (and more specifically the Data Source API) is listing the content of the root folder and its subfolders, in order to discover the partitioning columns and map each column value to a path. The result of this job is an <code>InMemoryFileIndex</code> object that will be used later to access the data.</li>
+<li>To do partition discovery, Spark does not systematically trigger jobs; this depends on a threshold that is defined in configuration, namely <code>spark.sql.sources.parallelPartitionDiscovery.threshold</code> (default value is 32). If the number of paths that constitute the data is below this threshold, Spark will achieve partition discovery directly on the driver, otherwise, Spark will launch parallel jobs, as we have seen in our case. You can take a look at the implementation of this logic <a href="https://github.com/apache/spark/blob/v3.0.0/sql/core/src/main/scala/org/apache/spark/sql/execution/datasources/InMemoryFileIndex.scala#L186"><strong>here</strong></a>.</li>
+<li>Job 2 : Spark is infering schema by scanning the entire dataset.</li>
+</ul>
+<p>Let’s explore a little bit further, by taking a look at the physical plan generated by Spark for this dataframe :</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">== Physical Plan ==
+</span></span><span class="line"><span class="cl">FileScan json [bikes_available#7L,docks_available#8L,time#9,station_id#10,month#11], Batched: false, DataFilters: [], Format: JSON, Location: InMemoryFileIndex[file:/data/bike-data-big/partitioned_status.json], PartitionFilters: [isnotnull(station_id#10), (station_id#10 = 10), month#11 IN (2013-08,2013-09)], PushedFilters: [], ReadSchema: struct&lt;bikes_available:bigint,docks_available:bigint,time:string&gt;
+</span></span></code></pre></div><ul>
+<li>You can see that the physical plan makes use of both the <code>InMemoryFileIndex</code> and the <code>ReadSchema</code> that have been built by the Data Source API in the preceding steps.</li>
+<li>Also, you can see that the <code>InMemoryFileIndex</code> is built on top of the root folder (<em>file:/data/bike-data-big/partitioned_status.json</em>). Despite the fact that we have provided a filter, Spark (version 3.0) did not push the filter down to be used in the <code>FileScan</code> operator to do partition pruning.</li>
+</ul>
+<p>So far, we have identified three different issues related to loading partitioned JSON data in Spark :</p>
+<ul>
+<li><strong>Issue 1</strong> : Spark will run partition discovery jobs each time we load the data (depends on the number of folders).</li>
+<li><strong>Issue 2</strong> : Also, Spark will launch a job that will scan the whole dataset in order to infer the schema.</li>
+<li><strong>Issue 3</strong> : Predicate pushdown is disabled, although Spark has collected all the meta-data needed.</li>
+</ul>
+<p>In the next section, we&rsquo;ll try to cover some solutions to these issues.</p>
+<h2 id="solution-1--using-basepath">Solution 1 : Using <code>basePath</code></h2>
+<hr>
+<p>The first approach is to reduce the scope of the data by explicitly specifying the folders of interest:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-scala" data-lang="scala"><span class="line"><span class="cl"><span class="k">val</span> <span class="n">df2</span> <span class="k">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">option</span><span class="o">(</span><span class="s">&#34;basePath&#34;</span><span class="o">,</span> <span class="s">&#34;file:///data/bike-data-big/partitioned_status.json&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">json</span><span class="o">(</span><span class="s">&#34;file:///data/bike-data-big/partitioned_status.json/station_id=10&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">filter</span><span class="o">(</span><span class="s">&#34;station_id = 10 and (month in (&#39;2013-08&#39;, &#39;2013-09&#39;))&#34;</span><span class="o">)</span>
+</span></span></code></pre></div><ul>
+<li>Since we are only interested in data from station n°10, we pass the sub-folder that contains the data of this station to the JSON reader.</li>
+<li><code>basePath</code> : this option will override the path used by Spark in partition discovery. If we do not provide <code>basePath</code> option, the default base path will be the path passed to the JSON reader (<em>&hellip;/partitioned_status.json/station_id=10</em>), which will result in the <code>station_id</code> column not being added to the schema.</li>
+</ul>
+<p>By applying this method, loading the data becomes significantly faster:
+<img src="/content/post/20200830_spark_load_partitioned_json/basePath.png" alt="Using basePath option"></p>
+<p>Even with this method, predicate pushdown is still disabled. But since we pre-filtered the data by specifying a sub-folder, the <code>InMemoryFileIndex</code> is built on top of that folder :</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">== Physical Plan ==
+</span></span><span class="line"><span class="cl">FileScan json [bikes_available#184L,docks_available#185L,time#186,station_id#187,month#188] Batched: false, DataFilters: [], Format: JSON, Location: InMemoryFileIndex[file:/data/bike-data-big/partitioned_status.json/station_id=10], PartitionFilters: [isnotnull(station_id#187), (station_id#187 = 10), month#188 IN (2013-08,2013-09)], PushedFilters: [], ReadSchema: struct&lt;bikes_available:bigint,docks_available:bigint,time:string&gt;
+</span></span></code></pre></div><h3 id="solution-2--specifying-a-sampling-ratio">Solution 2 : Specifying a sampling ratio</h3>
+<hr>
+<p>By default JSON data source will try to infer schema by scanning the entire data set. There is an option called <code>samplingRatio</code> that we can tweak in order to make Spark scan a part of the data.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-scala" data-lang="scala"><span class="line"><span class="cl"><span class="k">val</span> <span class="n">df3</span> <span class="k">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">option</span><span class="o">(</span><span class="s">&#34;samplingRatio&#34;</span><span class="o">,</span> <span class="mf">0.001</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">json</span><span class="o">(</span><span class="s">&#34;file:///data/bike-data-big/partitioned_status.json&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">filter</span><span class="o">(</span><span class="s">&#34;station_id = 10 and (month in (&#39;2013-08&#39;, &#39;2013-09&#39;))&#34;</span><span class="o">)</span>
+</span></span></code></pre></div><p><img src="/content/post/20200830_spark_load_partitioned_json/samplingRatio.png" alt="Sampling Ratio"></p>
+<ul>
+<li>Partition discovery jobs are still there, but the schema inference job is significantly faster, because we are scanning only 0.1% of the total data set instead of 100% by default.</li>
+</ul>
+<h3 id="solution-3--accessing-via-unmanaged-table">Solution 3 : Accessing via unmanaged table</h3>
+<hr>
+<p>Both solutions presented so far reduced the time of schema inference, but did not provide a solution to enable predicate pushdown. This section will give a solution that will resolve the three issues altogether.</p>
+<p>We will create an unmanaged table on top of the JSON data, and will load and query the data from that table :</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-scala" data-lang="scala"><span class="line"><span class="cl"><span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="o">(</span><span class="s">&#34;CREATE TABLE IF NOT EXISTS sf_bike_status USING JSON OPTIONS (path &#39;file:///data/bike-data-big/partitioned_status.json&#39;)&#34;</span><span class="o">)</span>
+</span></span></code></pre></div><ul>
+<li><code>CREATE TABLE</code> command will launch partition discovery and schema inference in the same way as we have seen before.</li>
+<li>The metadata collected will be stored in the Spark catalog, and reused whenever the data is accessed.</li>
+</ul>
+<p>One last step, before we can query the data, we need to call <code>MSCK REPAIR TABLE</code> in order  to register the existing partitions in the catalog:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-scala" data-lang="scala"><span class="line"><span class="cl"><span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="o">(</span><span class="s">&#34;MSCK REPAIR TABLE sf_bike_status&#34;</span><span class="o">)</span>
+</span></span></code></pre></div><ul>
+<li>This command is described in more detail <a href="https://spark.apache.org/docs/3.0.0-preview/sql-ref-syntax-ddl-repair-table.html"><strong>here</strong></a>.</li>
+</ul>
+<p>From now on, we can query the data using the unmanaged table:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-scala" data-lang="scala"><span class="line"><span class="cl"><span class="k">val</span> <span class="n">df4</span> <span class="k">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">table</span><span class="o">(</span><span class="s">&#34;sf_bike_status&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">filter</span><span class="o">(</span><span class="s">&#34;station_id = 10 and (month in (&#39;2013-08&#39;, &#39;2013-09&#39;))&#34;</span><span class="o">)</span>
+</span></span></code></pre></div><ul>
+<li>There was no need to infer the schema, because it has been loaded from the catalog.</li>
+<li>Compared to reading directly from JSON file, the loading time is reduced from a few minutes to sub-second.</li>
+</ul>
+<p>What about predicate pushdown ?</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-scala" data-lang="scala"><span class="line"><span class="cl"><span class="n">df4</span><span class="o">.</span><span class="n">expalin</span><span class="o">()</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">== Physical Plan ==
+</span></span><span class="line"><span class="cl">FileScan json default.sf_bike_status[bikes_available#0L,docks_available#1L,time#2,station_id#3,month#4] Batched: false, DataFilters: [], Format: JSON, Location: InMemoryFileIndex[file:/data/bike-data-big/partitioned_status.json/station_id=10/month=2013-08, f..., PartitionFilters: [isnotnull(station_id#3), (station_id#3 = 10), month#4 IN (2013-08,2013-09)], PushedFilters: [], ReadSchema: struct&lt;bikes_available:bigint,docks_available:bigint,time:string&gt;
+</span></span></code></pre></div><ul>
+<li>As you can see in the <code>InMemoryFileIndex</code>, reading the data via a table has enabled predicate pushdown. This leads to improvement in read performance.</li>
+</ul>
+<p>It is worth saying that even when reading from a table, partition discovery is still there. But, since we have predicate pushdown enabled, the partition discovery is limited to the scope of the paths covered by the filter. In our case, the partition discovery did not trigger Spark jobs, because the number of paths (2 paths after predicate pushdown) is below the parallel discovery threshold (default value is 32), as discussed in the first section.</p>
+<h3 id="conclusion">Conclusion</h3>
+<hr>
+<p>Reading partitioned JSON files (or even partitioned CSV files with <code>inferSchema=true</code>) can take a significant amount of time, during which Spark does two things: partition discovery and schema inference.</p>
+<p>The other important issue we have identified is that Spark does not apply predicate pushdown optimisation when reading from JSON partitioned data (as far as version 3.0.0).</p>
+<p>We have explored a few ways to handle these issues, and the most effective solution was to create an unmanaged table on top of the JSON files. However, there is one problem with this solution: we need to call <code>MSCK REPAIR TABLE</code> in order to update the catalog, whenever the data is updated.</p>
+<p>Thank you for reading this,</p>
+<p>You can find the code in the following Gist :</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-scala" data-lang="scala"><span class="line"><span class="cl"><span class="c1">// 1. Prepare the data 
+</span></span></span><span class="line"><span class="cl"><span class="c1">// status.csv can be found in this url : https://www.kaggle.com/benhamner/sf-bay-area-bike-share/data?select=status.csv
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">spark</span><span class="o">.</span><span class="n">read</span>
+</span></span><span class="line"><span class="cl">     <span class="o">.</span><span class="n">option</span><span class="o">(</span><span class="s">&#34;inferSchema&#34;</span><span class="o">,</span> <span class="s">&#34;true&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">     <span class="o">.</span><span class="n">option</span><span class="o">(</span><span class="s">&#34;header&#34;</span><span class="o">,</span> <span class="s">&#34;true&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">     <span class="o">.</span><span class="n">csv</span><span class="o">(</span><span class="s">&#34;file:///data/bike-data-big/status.csv&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">     <span class="o">.</span><span class="n">withColumn</span><span class="o">(</span><span class="s">&#34;month&#34;</span><span class="o">,</span> <span class="n">regexp_replace</span><span class="o">(</span><span class="n">substring</span><span class="o">(</span><span class="n">time</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">7</span><span class="o">),</span> <span class="s">&#34;/&#34;</span><span class="o">,</span> <span class="s">&#34;-&#34;</span><span class="o">))</span>
+</span></span><span class="line"><span class="cl">     <span class="o">.</span><span class="n">write</span>
+</span></span><span class="line"><span class="cl">     <span class="o">.</span><span class="n">partitionBy</span><span class="o">(</span><span class="s">&#34;station_id&#34;</span><span class="o">,</span> <span class="s">&#34;month&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">     <span class="o">.</span><span class="n">format</span><span class="o">(</span><span class="s">&#34;json&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">     <span class="o">.</span><span class="n">save</span><span class="o">(</span><span class="s">&#34;file:///data/bike-data-big/partitioned_status.json&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 2. Read from JSON partitioned data : 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">val</span> <span class="n">df1</span> <span class="k">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span>
+</span></span><span class="line"><span class="cl">               <span class="o">.</span><span class="n">json</span><span class="o">(</span><span class="s">&#34;file:///data/bike-data-big/partitioned_status.json&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">               <span class="o">.</span><span class="n">filter</span><span class="o">(</span><span class="s">&#34;station_id = 10 and (month in (&#39;2013-08&#39;, &#39;2013-09&#39;))&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 3. Using basePath :
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">val</span> <span class="n">df2</span> <span class="k">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span>
+</span></span><span class="line"><span class="cl">               <span class="o">.</span><span class="n">option</span><span class="o">(</span><span class="s">&#34;basePath&#34;</span><span class="o">,</span> <span class="s">&#34;file:///data/bike-data-big/partitioned_status.json&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">               <span class="o">.</span><span class="n">json</span><span class="o">(</span><span class="s">&#34;file:///data/bike-data-big/partitioned_status.json/station_id=10&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">               <span class="o">.</span><span class="n">filter</span><span class="o">(</span><span class="s">&#34;station_id = 10 and (month in (&#39;2013-08&#39;, &#39;2013-09&#39;))&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 4. Using samplingRatio : 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">val</span> <span class="n">df3</span> <span class="k">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span>
+</span></span><span class="line"><span class="cl">               <span class="o">.</span><span class="n">option</span><span class="o">(</span><span class="s">&#34;samplingRatio&#34;</span><span class="o">,</span> <span class="mf">0.001</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">               <span class="o">.</span><span class="n">json</span><span class="o">(</span><span class="s">&#34;file:///data/bike-data-big/partitioned_status.json&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">               <span class="o">.</span><span class="n">filter</span><span class="o">(</span><span class="s">&#34;station_id = 10 and (month in (&#39;2013-08&#39;, &#39;2013-09&#39;))&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 5. Accessing data from an unmanaged table : 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="o">(</span><span class="s">&#34;CREATE TABLE IF NOT EXISTS sf_bike_status USING JSON OPTIONS (path &#39;file:///data/bike-data-big/partitioned_status.json&#39;)&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="o">(</span><span class="s">&#34;MSCK REPAIR TABLE sf_bike_status&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">val</span> <span class="n">df4</span> <span class="k">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span>
+</span></span><span class="line"><span class="cl">               <span class="o">.</span><span class="n">table</span><span class="o">(</span><span class="s">&#34;sf_bike_status&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">               <span class="o">.</span><span class="n">filter</span><span class="o">(</span><span class="s">&#34;station_id = 10 and (month in (&#39;2013-08&#39;, &#39;2013-09&#39;))&#34;</span><span class="o">)</span>
+</span></span></code></pre></div>
+
+        
+          <div class="blog-tags">
+            
+              
+              <a href="https://brokenbackend.blog/tags/tech-spark/">Tech: Spark</a>&nbsp;
+            
+              
+              <a href="https://brokenbackend.blog/tags/topic-optimisation/">Topic: Optimisation</a>&nbsp;
+            
+              
+              <a href="https://brokenbackend.blog/tags/format-howto/">Format: Howto</a>&nbsp;
+            
+          </div>
+        
+
+        
+
+        
+          
+            
+          
+
+          
+                  <h4 class="see-also">See also</h4>
+                  <ul>
+                
+                
+                    <li><a href="/post/20200820_spark_rows_number/">How to add row numbers to a Spark DataFrame?</a></li>
+                
+                    <li><a href="/post/20200814_spark_count_per_partition/">Spark DataFrame - two ways to count the number of rows per partition</a></li>
+                
+              </ul>
+
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://brokenbackend.blog/post/20200820_spark_rows_number/" data-toggle="tooltip" data-placement="top" title="How to add row numbers to a Spark DataFrame?">&larr; Previous Post</a>
+            </li>
+          
+          
+        </ul>
+      
+
+
+      
+      
+      
+      
+      
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      <footer>
+  <div class="container">
+    
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+		
+		  <a href="mailto:wissem@brokenbackend.blog" title="Email me">
+		
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+		
+		  <a href="https://github.com/wbelguidoum" title="GitHub">
+		
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+		
+		  <a href="https://linkedin.com/in/wbelguidoum" title="LinkedIn">
+		
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+		
+		  <a href="https://www.youtube.com/@wissembelguidoum" title="Youtube">
+		
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-youtube fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="brokenbackend.blog">Wissem</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;&copy;
+          
+            2025
+          
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://brokenbackend.blog/">Broken Backend</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.151.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.js" integrity="sha384-G0zcxDFp5LWZtDuRMnBkk3EphCK1lhEf4UEyEM693ka574TZGwo4IWwS6QLzM/2t" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.slim.min.js" integrity="sha384-w5y/xIeYixWvfM+A1cEbmHPURnvyqmVg5eVENruEdDjcyRLUSNej7512JQGspFUr" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
+<script src="https://brokenbackend.blog/js/main.js"></script>
+<script src="https://brokenbackend.blog/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> $(document).ready(function() {$("pre.chroma").css("padding","0");}); </script><script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script><script src="https://brokenbackend.blog/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+
+
+
+
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WBK2LV2N"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+
+    
+  </body>
+</html>
+

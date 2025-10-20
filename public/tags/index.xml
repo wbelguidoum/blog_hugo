@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Broken Backend</title>
+    <link>https://brokenbackend.blog/tags/</link>
+    <description>Recent content in Tags on Broken Backend</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <managingEditor>wissem@brokenbackend.blog (Wissem)</managingEditor>
+    <webMaster>wissem@brokenbackend.blog (Wissem)</webMaster>
+    <lastBuildDate>Sun, 30 Aug 2020 00:00:00 +0100</lastBuildDate>
+    <atom:link href="https://brokenbackend.blog/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Format: Howto</title>
+      <link>https://brokenbackend.blog/tags/format-howto/</link>
+      <pubDate>Sun, 30 Aug 2020 00:00:00 +0100</pubDate><author>wissem@brokenbackend.blog (Wissem)</author>
+      <guid>https://brokenbackend.blog/tags/format-howto/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Tech: Spark</title>
+      <link>https://brokenbackend.blog/tags/tech-spark/</link>
+      <pubDate>Sun, 30 Aug 2020 00:00:00 +0100</pubDate><author>wissem@brokenbackend.blog (Wissem)</author>
+      <guid>https://brokenbackend.blog/tags/tech-spark/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Topic: Optimisation</title>
+      <link>https://brokenbackend.blog/tags/topic-optimisation/</link>
+      <pubDate>Sun, 30 Aug 2020 00:00:00 +0100</pubDate><author>wissem@brokenbackend.blog (Wissem)</author>
+      <guid>https://brokenbackend.blog/tags/topic-optimisation/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

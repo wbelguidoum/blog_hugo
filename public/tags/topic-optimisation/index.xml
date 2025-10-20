@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Topic: Optimisation on Broken Backend</title>
+    <link>https://brokenbackend.blog/tags/topic-optimisation/</link>
+    <description>Recent content in Topic: Optimisation on Broken Backend</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <managingEditor>wissem@brokenbackend.blog (Wissem)</managingEditor>
+    <webMaster>wissem@brokenbackend.blog (Wissem)</webMaster>
+    <lastBuildDate>Sun, 30 Aug 2020 00:00:00 +0100</lastBuildDate>
+    <atom:link href="https://brokenbackend.blog/tags/topic-optimisation/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How to optimise loading partitioned JSON data in Spark ?</title>
+      <link>https://brokenbackend.blog/post/20200830_spark_load_partitioned_json/</link>
+      <pubDate>Sun, 30 Aug 2020 00:00:00 +0100</pubDate><author>wissem@brokenbackend.blog (Wissem)</author>
+      <guid>https://brokenbackend.blog/post/20200830_spark_load_partitioned_json/</guid>
+      <description>&lt;p&gt;In this tutorial we will explore ways to optimise loading partitioned JSON data in Spark.&lt;/p&gt;&#xA;&lt;p&gt;I have used the SF Bay Area Bike Share dataset, you can find it &lt;a href=&#34;https://www.kaggle.com/benhamner/sf-bay-area-bike-share/data#&#34;&gt;&lt;strong&gt;here&lt;/strong&gt;&lt;/a&gt;. The original data (&lt;em&gt;status.csv&lt;/em&gt;) have gone through few transformations. The result looks like:&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://brokenbackend.blog/content/post/20200830_spark_load_partitioned_json/tree.png&#34; alt=&#34;Partitioned JSON data&#34;&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;loading-from-partitioned-json-files&#34;&gt;Loading from partitioned JSON files&lt;/h2&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;We will load the data filtered by station and month :&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-scala&#34; data-lang=&#34;scala&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;val&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;df1&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;spark&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;read&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&#x9;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;json&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;file:///data/bike-data-big/partitioned_status.json&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&#x9;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;filter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;station_id = 10 and (month in (&amp;#39;2013-08&amp;#39;, &amp;#39;2013-09&amp;#39;))&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Despite the fact that the code above does not contain any action yet, Spark starts three jobs that took few minutes to complete (on a local setting, with 8 cores and 32 Gigs of RAM):&#xA;&lt;img src=&#34;https://brokenbackend.blog/content/post/20200830_spark_load_partitioned_json/slow_json_loading.png&#34; alt=&#34;Slow JSON Loading&#34;&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
