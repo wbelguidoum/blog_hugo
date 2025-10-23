@@ -15,16 +15,7 @@
       <title>How to optimise loading partitioned JSON data in Spark ? -  </title>
 
   <meta name="description" content="In this tutorial we will explore ways to optimise loading partitioned JSON data in Spark.
-I have used the SF Bay Area Bike Share dataset, you can find it here. The original data (status.csv) have gone through few transformations. The result looks like:
-
-Loading from partitioned JSON files
-
-We will load the data filtered by station and month :
-val df1 = spark.read
-	.json(&#34;file:///data/bike-data-big/partitioned_status.json&#34;)
-	.filter(&#34;station_id = 10 and (month in (&#39;2013-08&#39;, &#39;2013-09&#39;))&#34;)
-Despite the fact that the code above does not contain any action yet, Spark starts three jobs that took few minutes to complete (on a local setting, with 8 cores and 32 Gigs of RAM):
-">
+I have used the SF Bay Area Bike Share dataset, you can find it here. The original data (status.csv) have gone through few transformations. The result looks like:">
   <meta name="author" content="Wissem"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -73,7 +64,7 @@ Despite the fact that the code above does not contain any action yet, Spark star
     "name" : "Wissem"
   },
   "headline": "How to optimise loading partitioned JSON data in Spark ?",
-  "description" : "In this tutorial we will explore ways to optimise loading partitioned JSON data in Spark.\nI have used the SF Bay Area Bike Share dataset, you can find it here. The original data (status.csv) have gone through few transformations. The result looks like:\nLoading from partitioned JSON files We will load the data filtered by station and month :\nval df1 = spark.read .json(\u0026#34;file:\/\/\/data\/bike-data-big\/partitioned_status.json\u0026#34;) .filter(\u0026#34;station_id = 10 and (month in (\u0026#39;2013-08\u0026#39;, \u0026#39;2013-09\u0026#39;))\u0026#34;) Despite the fact that the code above does not contain any action yet, Spark starts three jobs that took few minutes to complete (on a local setting, with 8 cores and 32 Gigs of RAM): ",
+  "description" : "In this tutorial we will explore ways to optimise loading partitioned JSON data in Spark.\nI have used the SF Bay Area Bike Share dataset, you can find it here. The original data (status.csv) have gone through few transformations. The result looks like:\n",
   "inLanguage" : "en",
   "wordCount":  1321 ,
   "datePublished" : "2020-08-30T00:00:00\u002b01:00",
@@ -97,16 +88,7 @@ Despite the fact that the code above does not contain any action yet, Spark star
 
 <meta property="og:title" content="How to optimise loading partitioned JSON data in Spark ?" />
 <meta property="og:description" content="In this tutorial we will explore ways to optimise loading partitioned JSON data in Spark.
-I have used the SF Bay Area Bike Share dataset, you can find it here. The original data (status.csv) have gone through few transformations. The result looks like:
-
-Loading from partitioned JSON files
-
-We will load the data filtered by station and month :
-val df1 = spark.read
-	.json(&#34;file:///data/bike-data-big/partitioned_status.json&#34;)
-	.filter(&#34;station_id = 10 and (month in (&#39;2013-08&#39;, &#39;2013-09&#39;))&#34;)
-Despite the fact that the code above does not contain any action yet, Spark starts three jobs that took few minutes to complete (on a local setting, with 8 cores and 32 Gigs of RAM):
-">
+I have used the SF Bay Area Bike Share dataset, you can find it here. The original data (status.csv) have gone through few transformations. The result looks like:">
 <meta property="og:image" content="https://brokenbackend.blog/img/avatar-icon.png" />
 <meta property="og:url" content="https://brokenbackend.blog/post/20200830_spark_load_partitioned_json/" />
 <meta property="og:type" content="website" />
@@ -496,6 +478,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               <a href="https://brokenbackend.blog/post/20200820_spark_rows_number/" data-toggle="tooltip" data-placement="top" title="How to add row numbers to a Spark DataFrame?">&larr; Previous Post</a>
             </li>
           
+          
+            <li class="next">
+              <a href="https://brokenbackend.blog/post/20251014_famshare.part01/" data-toggle="tooltip" data-placement="top" title="FamShare - A Saga of JWT flaws - Ep. 01">Next Post &rarr;</a>
+            </li>
           
         </ul>
       

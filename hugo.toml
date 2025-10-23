@@ -8,7 +8,7 @@ pygmentsCodeFences = true
 pygmentsCodefencesGuessSyntax = true
 #pygmentsUseClassic = true
 #pygmentOptions = "linenos=inline"
-
+summaryLength = 30
 [Services]
   [Services.Disqus]
     # Shortname = "XXX"

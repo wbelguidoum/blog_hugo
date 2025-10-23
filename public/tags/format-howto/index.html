@@ -265,15 +265,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         
         <p>In this tutorial we will explore ways to optimise loading partitioned JSON data in Spark.</p>
 <p>I have used the SF Bay Area Bike Share dataset, you can find it <a href="https://www.kaggle.com/benhamner/sf-bay-area-bike-share/data#"><strong>here</strong></a>. The original data (<em>status.csv</em>) have gone through few transformations. The result looks like:</p>
-<p><img src="/content/post/20200830_spark_load_partitioned_json/tree.png" alt="Partitioned JSON data"></p>
-<h2 id="loading-from-partitioned-json-files">Loading from partitioned JSON files</h2>
-<hr>
-<p>We will load the data filtered by station and month :</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-scala" data-lang="scala"><span class="line"><span class="cl"><span class="k">val</span> <span class="n">df1</span> <span class="k">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span>
-</span></span><span class="line"><span class="cl">	<span class="o">.</span><span class="n">json</span><span class="o">(</span><span class="s">&#34;file:///data/bike-data-big/partitioned_status.json&#34;</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl">	<span class="o">.</span><span class="n">filter</span><span class="o">(</span><span class="s">&#34;station_id = 10 and (month in (&#39;2013-08&#39;, &#39;2013-09&#39;))&#34;</span><span class="o">)</span>
-</span></span></code></pre></div><p>Despite the fact that the code above does not contain any action yet, Spark starts three jobs that took few minutes to complete (on a local setting, with 8 cores and 32 Gigs of RAM):
-<img src="/content/post/20200830_spark_load_partitioned_json/slow_json_loading.png" alt="Slow JSON Loading"></p>
         <a href="https://brokenbackend.blog/post/20200830_spark_load_partitioned_json/" class="post-read-more">[Read More]</a>
         
     </div>
@@ -329,18 +320,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         
         <p>In this tutorial, we will explore a couple of ways to add a sequential consecutive row number to a dataframe.</p>
 <p>For example, let this be our dataframe (taken from <a href="https://github.com/databricks/Spark-The-Definitive-Guide"><strong>Spark: The Definitive Guide github repo</strong></a>):</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-scala" data-lang="scala"><span class="line"><span class="cl"><span class="k">val</span> <span class="n">df</span> <span class="k">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">option</span><span class="o">(</span><span class="s">&#34;header&#34;</span><span class="o">,</span> <span class="s">&#34;true&#34;</span><span class="o">).</span><span class="n">csv</span><span class="o">(</span><span class="s">&#34;.../data/flight-data/csv/*&#34;</span><span class="o">)</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">+-----------------+-------------------+-----+
-</span></span><span class="line"><span class="cl">|DEST_COUNTRY_NAME|ORIGIN_COUNTRY_NAME|count|
-</span></span><span class="line"><span class="cl">+-----------------+-------------------+-----+
-</span></span><span class="line"><span class="cl">|    United States|            Romania|    1|
-</span></span><span class="line"><span class="cl">|    United States|            Ireland|  264|
-</span></span><span class="line"><span class="cl">|    United States|              India|   69|
-</span></span><span class="line"><span class="cl">|            Egypt|      United States|   24|
-</span></span><span class="line"><span class="cl">|Equatorial Guinea|      United States|    1|
-</span></span><span class="line"><span class="cl">+-----------------+-------------------+-----+
-</span></span><span class="line"><span class="cl">only showing top 5 rows
-</span></span></code></pre></div><p>After adding a column containing the row number, the result should look like:</p>
         <a href="https://brokenbackend.blog/post/20200820_spark_rows_number/" class="post-read-more">[Read More]</a>
         
     </div>
@@ -398,14 +377,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
 <li>
 <p>The second way (the faster according to my observations) is using the <code>spark_partition_id()</code> function, followed by a grouping count aggregation.</p>
-</li>
-</ul>
-<h2 id="lets-first-load-the-data-into-a-dataframe">Let&rsquo;s first load the data into a dataframe</h2>
-<p><em>I have used the SF Bay Area Bike data source, that can be found <a href="https://www.kaggle.com/benhamner/sf-bay-area-bike-share/data#"><strong>here</strong></a></em></p>
-<p>Scala :</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-scala" data-lang="scala"><span class="line"><span class="cl"><span class="k">val</span> <span class="n">df</span> <span class="k">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="o">(</span><span class="s">&#34;file:///.../status.csv&#34;</span><span class="o">)</span>
-</span></span></code></pre></div><h2 id="method-1---using-mappartitions">Method 1 - using mapPartitions()</h2>
-<p>Scala :</p>
         <a href="https://brokenbackend.blog/post/20200814_spark_count_per_partition/" class="post-read-more">[Read More]</a>
         
     </div>
