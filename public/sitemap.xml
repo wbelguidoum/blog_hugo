@@ -3,33 +3,18 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://brokenbackend.blog/</loc>
-    <lastmod>2025-10-21T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://brokenbackend.blog/post/20251014_famshare.part01/</loc>
-    <lastmod>2025-10-21T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://brokenbackend.blog/tags/format-story/</loc>
-    <lastmod>2025-10-21T00:00:00+00:00</lastmod>
+    <lastmod>2025-11-20T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://brokenbackend.blog/post/</loc>
-    <lastmod>2025-10-21T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://brokenbackend.blog/tags/story-famshare/</loc>
-    <lastmod>2025-10-21T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://brokenbackend.blog/tags/</loc>
-    <lastmod>2025-10-21T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://brokenbackend.blog/tags/tech-jwt/</loc>
-    <lastmod>2025-10-21T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://brokenbackend.blog/tags/topic-security/</loc>
-    <lastmod>2025-10-21T00:00:00+00:00</lastmod>
+    <lastmod>2025-11-20T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://brokenbackend.blog/tags/format-howto/</loc>
     <lastmod>2020-08-30T00:00:00+01:00</lastmod>
   </url><url>
     <loc>https://brokenbackend.blog/post/20200830_spark_load_partitioned_json/</loc>
+    <lastmod>2020-08-30T00:00:00+01:00</lastmod>
+  </url><url>
+    <loc>https://brokenbackend.blog/tags/</loc>
     <lastmod>2020-08-30T00:00:00+01:00</lastmod>
   </url><url>
     <loc>https://brokenbackend.blog/tags/tech-spark/</loc>

@@ -8,15 +8,8 @@
     <language>en</language>
     <managingEditor>wissem@brokenbackend.blog (Wissem)</managingEditor>
     <webMaster>wissem@brokenbackend.blog (Wissem)</webMaster>
-    <lastBuildDate>Tue, 21 Oct 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 30 Aug 2020 00:00:00 +0100</lastBuildDate>
     <atom:link href="https://brokenbackend.blog/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>FamShare - A Saga of JWT flaws - Ep. 01</title>
-      <link>https://brokenbackend.blog/post/20251014_famshare.part01/</link>
-      <pubDate>Tue, 21 Oct 2025 00:00:00 +0000</pubDate><author>wissem@brokenbackend.blog (Wissem)</author>
-      <guid>https://brokenbackend.blog/post/20251014_famshare.part01/</guid>
-      <description>&lt;p&gt;Under what circumstances should we step off a path? When is it essential that we finish what we start? If I bought a bag of peanuts and had an allergic reaction, no one would fault me if I threw it out. If I ended a relationship with a woman who hit me, no one would say that I had a commitment problem. But if I walk away from a seemingly secure route because my soul has other ideas, I am a flake?&lt;/p&gt;</description>
-    </item>
     <item>
       <title>How to optimise loading partitioned JSON data in Spark ?</title>
       <link>https://brokenbackend.blog/post/20200830_spark_load_partitioned_json/</link>
