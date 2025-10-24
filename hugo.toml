@@ -16,6 +16,7 @@ summaryLength = 30
     id = "G-7Y03B2CKE4"
 
 [Params]
+  disableKinds = ["section"]
   homeTitle = " " # Set a different text for the header on the home page
   subtitle = ""
   mainSections = ["post","posts"]
