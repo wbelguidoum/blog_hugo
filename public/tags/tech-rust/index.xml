@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tech: Rust on Broken Backend</title>
+    <link>https://brokenbackend.blog/tags/tech-rust/</link>
+    <description>Recent content in Tech: Rust on Broken Backend</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <managingEditor>wissem@brokenbackend.blog (Wissem)</managingEditor>
+    <webMaster>wissem@brokenbackend.blog (Wissem)</webMaster>
+    <lastBuildDate>Fri, 21 Nov 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://brokenbackend.blog/tags/tech-rust/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Lesson in Error Management</title>
+      <link>https://brokenbackend.blog/post/20251122_cloudflare_outage/</link>
+      <pubDate>Fri, 21 Nov 2025 00:00:00 +0000</pubDate><author>wissem@brokenbackend.blog (Wissem)</author>
+      <guid>https://brokenbackend.blog/post/20251122_cloudflare_outage/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://brokenbackend.blog/img/20251118_cloudflare_outage.jpeg&#34; alt=&#34;Partitioned JSON data&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;A lot of developers complains about Golang.&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;em&gt;&amp;ldquo;Why do I have to type &lt;code&gt;if err != nil&lt;/code&gt; every single time?&amp;rdquo;&lt;/em&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&amp;ldquo;It is too much typing. It is boring.&amp;rdquo;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

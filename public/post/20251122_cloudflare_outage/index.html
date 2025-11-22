@@ -12,9 +12,9 @@
  
 
 
-      <title>Overview of all pages with the tag #Tags -  </title>
+      <title>Lesson in Error Management -  </title>
 
-  <meta name="description" content="Overview of all pages with the tag #Tags, such as: Format: Analysis">
+  <meta name="description" content="Why Golang&#39;s &#34;Boring&#34; Code is a Feature">
   <meta name="author" content="Wissem"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -35,14 +35,65 @@
   
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/brokenbackend.blog\/",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/brokenbackend.blog\/post\/20251122_cloudflare_outage\/",
+          "name": "Lesson in error management"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Wissem"
+  },
+  "headline": "Lesson in Error Management",
+  "description" : "\nA lot of developers complains about Golang.\n\u0026ldquo;Why do I have to type if err != nil every single time?\u0026rdquo;\n\u0026ldquo;It is too much typing. It is boring.\u0026rdquo;\n",
+  "inLanguage" : "en",
+  "wordCount":  500 ,
+  "datePublished" : "2025-11-21T00:00:00\u002b00:00",
+  "dateModified" : "2025-11-21T00:00:00\u002b00:00",
+  "image" : "https:\/\/brokenbackend.blog\/img\/avatar-icon.png",
+  "keywords" : [ "Story: Outage, Tech: Go, Tech: Rust, Topic: Resilience, Format: Analysis" ],
+  "mainEntityOfPage" : "https:\/\/brokenbackend.blog\/post\/20251122_cloudflare_outage\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/brokenbackend.blog\/",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/brokenbackend.blog\/img\/avatar-icon.png",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
 
-<meta property="og:title" content="Tags" />
+
+<meta property="og:title" content="Lesson in Error Management" />
+<meta property="og:description" content="Why Golang&#39;s &#34;Boring&#34; Code is a Feature">
 <meta property="og:image" content="https://brokenbackend.blog/img/avatar-icon.png" />
-<meta property="og:url" content="https://brokenbackend.blog/tags/" />
+<meta property="og:url" content="https://brokenbackend.blog/post/20251122_cloudflare_outage/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Broken Backend" />
 
-  <meta name="twitter:title" content="Tags" />
+  <meta name="twitter:title" content="Lesson in Error Management" />
+  <meta name="twitter:description" content="Why Golang&#39;s &#34;Boring&#34; Code is a Feature">
   <meta name="twitter:image" content="https://brokenbackend.blog/img/avatar-icon.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="generator" content="Hugo 0.151.0">
@@ -207,14 +258,37 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <div class="tags-heading">
+            <div class="post-heading">
               
-                <h1>Tags</h1>
-              
-              
-                <hr class="small">
+                <h1>Lesson in Error Management</h1>
               
               
+              
+                
+                  <h2 class="post-subheading">Why Golang&#39;s &#34;Boring&#34; Code is a Feature</h2>
+                
+              
+              
+                <span class="post-meta">
+  
+  
+  <i class="fas fa-calendar"></i>&nbsp;Posted on November 21, 2025
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;3&nbsp;minutes
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;500&nbsp;words
+  
+  
+    
+      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Wissem
+    
+  
+  
+</span>
+
+
               
             </div>
           </div>
@@ -226,212 +300,115 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
     
-
-
-
 <div class="container" role="main">
-  <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-    <article class="post-preview">
-      <div class="panel-group" id="accordion">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p><img src="/img/20251118_cloudflare_outage.jpeg" alt="Partitioned JSON data"></p>
+<p>A lot of developers complains about Golang.</p>
+<blockquote>
+<p><em>&ldquo;Why do I have to type <code>if err != nil</code> every single time?&rdquo;</em></p>
+<p><em>&ldquo;It is too much typing. It is boring.&rdquo;</em></p></blockquote>
+<p>But the recent Cloudflare outage shows why this &ldquo;boring&rdquo; code is actually a <strong>critical safety feature</strong>. Sometimes, the fastest path is the most dangerous.</p>
+<hr>
+<h3 id="1-the-breakdown-what-really-happened-on-november-18-2025">1. The Breakdown: What Really Happened on November 18, 2025</h3>
+<p><a href="https://blog.cloudflare.com/18-november-2025-outage/">A large part of the internet went down</a>. It was not a hacker. It was a mistake in the code.</p>
+<p>Cloudflare’s <strong>FL2 proxy engine</strong> (written in Rust) tried to read a configuration file that got too big due to a routine update. Instead of rejecting the file, the whole system crashed.</p>
+<p>This exposed the simple, brutal truth about shortcuts.</p>
+<hr>
+<h3 id="2-the-code-philosophy-convenience-vs-safeguard">2. The Code Philosophy: Convenience vs. Safeguard</h3>
+<h4 id="-the-rust-way-the-convenience-trap">🦀 The Rust Way: The Convenience Trap</h4>
+<p>Rust provides the <strong><code>.unwrap()</code></strong> shortcut. It’s designed to save typing, but it eliminates all safety checks.</p>
+<p>It basically tells the computer: <em>&ldquo;I am sure this works. If I am wrong, crash the program immediately.&rdquo;</em></p>
+<p>It is very fast to write:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="c1">// Easy to write, but dangerous
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">let</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">load_file</span><span class="p">().</span><span class="n">unwrap</span><span class="p">();</span><span class="w">
+</span></span></span></code></pre></div><p>If <code>load_file</code> has an error, the server dies. This is the code that caused the global panic.</p>
+<hr>
+<h4 id="-the-golang-way-friction-as-a-guardrail">🐹 The Golang Way: Friction as a Guardrail</h4>
+<p>Go does not have a magic &ldquo;crash button&rdquo; like <code>.unwrap()</code>. To force a crash, a developer must explicitly choose to destroy the process:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// You must choose to crash</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nx">val</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">loadFile</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="c1">// This feels wrong to write.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p>This code will not pass most serious code reviews, and linters will shout at you. Go forces you to handle the error, meaning the <strong>&ldquo;lazy&rdquo; path is actually the safe path.</strong></p>
+<p>Most Go developers will just log the error and continue:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">logger</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span><span class="s">&#34;File too big, skipping&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="c1">// The server stays ONLINE.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p><strong>Rust makes crashing easy. Go makes crashing hard.</strong></p>
+<hr>
+<h3 id="3-the-deeper-lesson-survival-over-perfection">3. The Deeper Lesson: Survival Over Perfection</h3>
+<p>The argument is not just about the code shortcut. The outage highlighted two core engineering failures that must be avoided:</p>
+<ul>
+<li><strong>The Design Flaw:</strong> The deepest problem was the <strong>hard-coded size limit</strong> for the config file. The system was too <strong>brittle</strong> (easily broken) by unexpected data.</li>
+<li><strong>The Missing Protocol:</strong> The system failed to have a <strong>graceful failure protocol</strong>. It should have rejected the bad configuration and reverted to the last known good file.</li>
+</ul>
+<h4 id="how-to-survive-the-error">How to Survive the Error</h4>
+<p>When a new config cannot be loaded, the operations team must be woken up, even if the user is not impacted. The system must &ldquo;scream for help&rdquo; without crashing:</p>
+<ul>
+<li><strong>Log Loudly:</strong> Immediately write a <strong><code>FATAL</code></strong> log message, detailing <em>why</em> the configuration failed.</li>
+<li><strong>Trigger an Alert:</strong> Increment a specific metric (e.g., <code>config_load_failure_total</code>) to trigger an immediate <strong>Pager Alert</strong> for the on-call engineer.</li>
+<li><strong>Stay Alive:</strong> Keep the server running using the last known good config.</li>
+</ul>
+<p>When you build systems for the entire internet, having to type a few extra lines of code is not boring—it’s <strong>system insurance</strong>.</p>
+
+
         
-          <div class="panel panel-default">
-            <a class="collapsed" role="button" data-toggle="collapse" data-target="#collapseformat-analysis" data-parent="#accordion">
-                <div class="panel-heading" id="headerformat-analysis">
-                  <h4 class="panel-title">
-                      Format: analysis
-                    <span class="badge">1</span>
-                  </h4>
-                </div>
-            </a>
-            <div id="collapseformat-analysis" class="panel-collapse collapse">
-              <div class="panel-body">
-                
-                <a href="https://brokenbackend.blog/tags/format-analysis/" class="list-group-item view-all">
-                View all</a>
-                <div class="list-group">
-                  
-                    <a href="https://brokenbackend.blog/post/20251122_cloudflare_outage/" class="list-group-item">Lesson in Error Management</a>
-                  
-                </div>
-              </div>
-            </div>
+          <div class="blog-tags">
+            
+              
+              <a href="https://brokenbackend.blog/tags/story-outage/">Story: Outage</a>&nbsp;
+            
+              
+              <a href="https://brokenbackend.blog/tags/tech-go/">Tech: Go</a>&nbsp;
+            
+              
+              <a href="https://brokenbackend.blog/tags/tech-rust/">Tech: Rust</a>&nbsp;
+            
+              
+              <a href="https://brokenbackend.blog/tags/topic-resilience/">Topic: Resilience</a>&nbsp;
+            
+              
+              <a href="https://brokenbackend.blog/tags/format-analysis/">Format: Analysis</a>&nbsp;
+            
           </div>
         
-          <div class="panel panel-default">
-            <a class="collapsed" role="button" data-toggle="collapse" data-target="#collapseformat-howto" data-parent="#accordion">
-                <div class="panel-heading" id="headerformat-howto">
-                  <h4 class="panel-title">
-                      Format: howto
-                    <span class="badge">3</span>
-                  </h4>
-                </div>
-            </a>
-            <div id="collapseformat-howto" class="panel-collapse collapse">
-              <div class="panel-body">
-                
-                <a href="https://brokenbackend.blog/tags/format-howto/" class="list-group-item view-all">
-                View all</a>
-                <div class="list-group">
-                  
-                    <a href="https://brokenbackend.blog/post/20200830_spark_load_partitioned_json/" class="list-group-item">How to optimise loading partitioned JSON data in Spark ?</a>
-                  
-                    <a href="https://brokenbackend.blog/post/20200820_spark_rows_number/" class="list-group-item">How to add row numbers to a Spark DataFrame?</a>
-                  
-                    <a href="https://brokenbackend.blog/post/20200814_spark_count_per_partition/" class="list-group-item">Spark DataFrame - two ways to count the number of rows per partition</a>
-                  
-                </div>
-              </div>
-            </div>
-          </div>
+
         
-          <div class="panel panel-default">
-            <a class="collapsed" role="button" data-toggle="collapse" data-target="#collapsestory-outage" data-parent="#accordion">
-                <div class="panel-heading" id="headerstory-outage">
-                  <h4 class="panel-title">
-                      Story: outage
-                    <span class="badge">1</span>
-                  </h4>
-                </div>
-            </a>
-            <div id="collapsestory-outage" class="panel-collapse collapse">
-              <div class="panel-body">
-                
-                <a href="https://brokenbackend.blog/tags/story-outage/" class="list-group-item view-all">
-                View all</a>
-                <div class="list-group">
-                  
-                    <a href="https://brokenbackend.blog/post/20251122_cloudflare_outage/" class="list-group-item">Lesson in Error Management</a>
-                  
-                </div>
-              </div>
-            </div>
-          </div>
+
         
-          <div class="panel panel-default">
-            <a class="collapsed" role="button" data-toggle="collapse" data-target="#collapsetech-go" data-parent="#accordion">
-                <div class="panel-heading" id="headertech-go">
-                  <h4 class="panel-title">
-                      Tech: go
-                    <span class="badge">1</span>
-                  </h4>
-                </div>
-            </a>
-            <div id="collapsetech-go" class="panel-collapse collapse">
-              <div class="panel-body">
-                
-                <a href="https://brokenbackend.blog/tags/tech-go/" class="list-group-item view-all">
-                View all</a>
-                <div class="list-group">
-                  
-                    <a href="https://brokenbackend.blog/post/20251122_cloudflare_outage/" class="list-group-item">Lesson in Error Management</a>
-                  
-                </div>
-              </div>
-            </div>
-          </div>
+          
+
+          
         
-          <div class="panel panel-default">
-            <a class="collapsed" role="button" data-toggle="collapse" data-target="#collapsetech-rust" data-parent="#accordion">
-                <div class="panel-heading" id="headertech-rust">
-                  <h4 class="panel-title">
-                      Tech: rust
-                    <span class="badge">1</span>
-                  </h4>
-                </div>
-            </a>
-            <div id="collapsetech-rust" class="panel-collapse collapse">
-              <div class="panel-body">
-                
-                <a href="https://brokenbackend.blog/tags/tech-rust/" class="list-group-item view-all">
-                View all</a>
-                <div class="list-group">
-                  
-                    <a href="https://brokenbackend.blog/post/20251122_cloudflare_outage/" class="list-group-item">Lesson in Error Management</a>
-                  
-                </div>
-              </div>
-            </div>
-          </div>
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://brokenbackend.blog/post/20200830_spark_load_partitioned_json/" data-toggle="tooltip" data-placement="top" title="How to optimise loading partitioned JSON data in Spark ?">&larr; Previous Post</a>
+            </li>
+          
+          
+        </ul>
+      
+
+
+      
+      
+      
+      
+      
         
-          <div class="panel panel-default">
-            <a class="collapsed" role="button" data-toggle="collapse" data-target="#collapsetech-spark" data-parent="#accordion">
-                <div class="panel-heading" id="headertech-spark">
-                  <h4 class="panel-title">
-                      Tech: spark
-                    <span class="badge">3</span>
-                  </h4>
-                </div>
-            </a>
-            <div id="collapsetech-spark" class="panel-collapse collapse">
-              <div class="panel-body">
-                
-                <a href="https://brokenbackend.blog/tags/tech-spark/" class="list-group-item view-all">
-                View all</a>
-                <div class="list-group">
-                  
-                    <a href="https://brokenbackend.blog/post/20200830_spark_load_partitioned_json/" class="list-group-item">How to optimise loading partitioned JSON data in Spark ?</a>
-                  
-                    <a href="https://brokenbackend.blog/post/20200820_spark_rows_number/" class="list-group-item">How to add row numbers to a Spark DataFrame?</a>
-                  
-                    <a href="https://brokenbackend.blog/post/20200814_spark_count_per_partition/" class="list-group-item">Spark DataFrame - two ways to count the number of rows per partition</a>
-                  
-                </div>
-              </div>
-            </div>
-          </div>
-        
-          <div class="panel panel-default">
-            <a class="collapsed" role="button" data-toggle="collapse" data-target="#collapsetopic-optimisation" data-parent="#accordion">
-                <div class="panel-heading" id="headertopic-optimisation">
-                  <h4 class="panel-title">
-                      Topic: optimisation
-                    <span class="badge">1</span>
-                  </h4>
-                </div>
-            </a>
-            <div id="collapsetopic-optimisation" class="panel-collapse collapse">
-              <div class="panel-body">
-                
-                <a href="https://brokenbackend.blog/tags/topic-optimisation/" class="list-group-item view-all">
-                View all</a>
-                <div class="list-group">
-                  
-                    <a href="https://brokenbackend.blog/post/20200830_spark_load_partitioned_json/" class="list-group-item">How to optimise loading partitioned JSON data in Spark ?</a>
-                  
-                </div>
-              </div>
-            </div>
-          </div>
-        
-          <div class="panel panel-default">
-            <a class="collapsed" role="button" data-toggle="collapse" data-target="#collapsetopic-resilience" data-parent="#accordion">
-                <div class="panel-heading" id="headertopic-resilience">
-                  <h4 class="panel-title">
-                      Topic: resilience
-                    <span class="badge">1</span>
-                  </h4>
-                </div>
-            </a>
-            <div id="collapsetopic-resilience" class="panel-collapse collapse">
-              <div class="panel-body">
-                
-                <a href="https://brokenbackend.blog/tags/topic-resilience/" class="list-group-item view-all">
-                View all</a>
-                <div class="list-group">
-                  
-                    <a href="https://brokenbackend.blog/post/20251122_cloudflare_outage/" class="list-group-item">Lesson in Error Management</a>
-                  
-                </div>
-              </div>
-            </div>
-          </div>
-        
-      </div>
-    </article>
+      
+
+    </div>
   </div>
 </div>
-
-
 
       <footer>
   <div class="container">
@@ -481,15 +458,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 </a>
               </li>
           
-          
-          <li>
-            <a href="/tags/index.xml" title="RSS">
-              <span class="fa-stack fa-lg">
-                <i class="fas fa-circle fa-stack-2x"></i>
-                <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
-              </span>
-            </a>
-          </li>
           
           
         </ul>

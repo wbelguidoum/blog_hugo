@@ -8,8 +8,43 @@
     <language>en</language>
     <managingEditor>wissem@brokenbackend.blog (Wissem)</managingEditor>
     <webMaster>wissem@brokenbackend.blog (Wissem)</webMaster>
-    <lastBuildDate>Sun, 30 Aug 2020 00:00:00 +0100</lastBuildDate>
+    <lastBuildDate>Fri, 21 Nov 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://brokenbackend.blog/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Format: Analysis</title>
+      <link>https://brokenbackend.blog/tags/format-analysis/</link>
+      <pubDate>Fri, 21 Nov 2025 00:00:00 +0000</pubDate><author>wissem@brokenbackend.blog (Wissem)</author>
+      <guid>https://brokenbackend.blog/tags/format-analysis/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Story: Outage</title>
+      <link>https://brokenbackend.blog/tags/story-outage/</link>
+      <pubDate>Fri, 21 Nov 2025 00:00:00 +0000</pubDate><author>wissem@brokenbackend.blog (Wissem)</author>
+      <guid>https://brokenbackend.blog/tags/story-outage/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Tech: Go</title>
+      <link>https://brokenbackend.blog/tags/tech-go/</link>
+      <pubDate>Fri, 21 Nov 2025 00:00:00 +0000</pubDate><author>wissem@brokenbackend.blog (Wissem)</author>
+      <guid>https://brokenbackend.blog/tags/tech-go/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Tech: Rust</title>
+      <link>https://brokenbackend.blog/tags/tech-rust/</link>
+      <pubDate>Fri, 21 Nov 2025 00:00:00 +0000</pubDate><author>wissem@brokenbackend.blog (Wissem)</author>
+      <guid>https://brokenbackend.blog/tags/tech-rust/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Topic: Resilience</title>
+      <link>https://brokenbackend.blog/tags/topic-resilience/</link>
+      <pubDate>Fri, 21 Nov 2025 00:00:00 +0000</pubDate><author>wissem@brokenbackend.blog (Wissem)</author>
+      <guid>https://brokenbackend.blog/tags/topic-resilience/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Format: Howto</title>
       <link>https://brokenbackend.blog/tags/format-howto/</link>
